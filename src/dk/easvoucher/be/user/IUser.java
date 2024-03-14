@@ -1,8 +1,8 @@
-package dk.easvoucher.be;
+package dk.easvoucher.be.user;
 
 public interface IUser {
-    int id();
-    String username();
-    UserRole role();
+    int getId();
+    String getUsername();
+    UserRole getRole();
 
 }
