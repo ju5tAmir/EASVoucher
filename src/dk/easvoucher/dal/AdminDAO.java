@@ -47,5 +47,21 @@ public class AdminDAO {
             e.printStackTrace();
         }
     }
+
+    public boolean updateUser(int userId, String newUsername, String newHashedPassword, String newRoleName) {
+        String sql = "UPDATE Users SET Username = ?, HashedPassword = ?, RoleId = (SELECT RoleId FROM UserRoles WHERE RoleName = ?) WHERE UserId = ?";
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newUsername);
+            pstmt.setString(2, newHashedPassword);
+            pstmt.setString(3, newRoleName);
+            pstmt.setInt(4, userId);
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 
