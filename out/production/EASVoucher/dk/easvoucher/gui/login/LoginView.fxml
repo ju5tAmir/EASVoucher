@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -58,10 +59,7 @@
       </VBox>
    </center>
    <top>
-      <Label text="EASV Events Management" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="35.0" />
-         </font>
+      <Label fx:id="titleLabel" styleClass="title-label" text="EASV Events Management" textFill="WHITE" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="-120.0" top="70.0" />
          </BorderPane.margin>
