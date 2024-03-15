@@ -1,2 +1,4 @@
-package dk.easvoucher.dal;public class CoordinatorDAO {
+package dk.easvoucher.dal;
+
+public class CoordinatorDAO {
 }

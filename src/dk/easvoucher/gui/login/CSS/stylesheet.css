@@ -11,6 +11,10 @@
 
 .title-label {
     -fx-text-fill: black;
+<<<<<<< HEAD
+=======
+    -fx-font-family: Farah;
+>>>>>>> origin/login
     -fx-font-size: 35px;
     -fx-effect:
             dropshadow(gaussian, rgba(232, 128, 91, 0.87), 2, 7, 2, 0)

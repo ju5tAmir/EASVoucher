@@ -1,2 +1,4 @@
-package dk.easvoucher.bll;public class AdminDAO {
+package dk.easvoucher.dal;
+
+public class AdminDAO {
 }

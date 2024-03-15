@@ -1,3 +1,16 @@
 package dk.easvoucher.be.response;
+
+import dk.easvoucher.be.event.Event;
+import dk.easvoucher.be.ticket.ITicket;
+import dk.easvoucher.be.user.IUser;
+
+import java.util.List;
+
 public interface IResponse {
+    boolean getStatus();
+    int getCode();
+    IUser getUser();
+    List<Event> getEvents();
+    List<ITicket> getTickets();
+
 }
