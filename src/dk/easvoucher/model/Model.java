@@ -4,13 +4,16 @@ import dk.easvoucher.be.event.Event;
 import dk.easvoucher.be.response.Response;
 import dk.easvoucher.be.ticket.ITicket;
 import dk.easvoucher.be.user.IUser;
+import dk.easvoucher.be.user.User;
 import dk.easvoucher.bll.LoginLogic;
+import dk.easvoucher.bll.UserManager;
 import dk.easvoucher.exeptions.ExceptionHandler;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class Model {
@@ -22,12 +25,15 @@ public class Model {
 
     private IUser user;
 
+    private UserManager userManager;
+
     /**
      * Constructor class
      */
     public Model(){
         // Set login getStatus to false when the class has just instantiated
         this.loginStatus = new SimpleBooleanProperty(false);
+        this.userManager= new UserManager();
     }
 
     /**
@@ -96,5 +102,17 @@ public class Model {
 
     private void setTickets(List<ITicket> tickets){
         this.ticketsList.addAll(tickets);
+    }
+
+    public void createUser(User user) throws ExceptionHandler, SQLException {
+        userManager.createUser(user);
+    }
+
+    public void removeUser(int id) throws ExceptionHandler, SQLException {
+        userManager.removeUser(id);
+    }
+
+    public List<User> getAllUsers() throws SQLException, ExceptionHandler {
+        return userManager.getAllUsers();
     }
 }

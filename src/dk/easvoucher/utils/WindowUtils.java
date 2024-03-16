@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 
 public class WindowUtils {
@@ -30,6 +31,8 @@ public class WindowUtils {
             case ADMIN_DASHBOARD:
                 // Initiate new FXMLLoader with admin dashboard
                 loader = new FXMLLoader(WindowUtils.class.getResource("../gui/dashboard/admin/AdminView.fxml"));
+
+
                 break;
 
             case COORDINATOR_DASHBOARD:
@@ -75,6 +78,7 @@ public class WindowUtils {
         }
         // Initiate new Scene based on loaded FXML file
         Scene scene = new Scene(loader.load());
+
         // Set loaded scene into stage
         stage.setScene(scene);
         // Show the stage
