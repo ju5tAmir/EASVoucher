@@ -1,0 +1,20 @@
+.stack-pane {
+    -fx-background-image: url("background.jpeg");
+    -fx-background-size: cover;
+}
+
+.v-box {
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+.title-label {
+    -fx-text-fill: black;
+    -fx-font-family: Farah;
+    -fx-font-size: 35px;
+    -fx-effect:
+            dropshadow(gaussian, rgba(232, 128, 91, 0.87), 2, 7, 2, 0)
+}
+
+

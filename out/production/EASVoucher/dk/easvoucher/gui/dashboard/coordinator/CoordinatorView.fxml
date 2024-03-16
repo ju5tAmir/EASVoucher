@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.coordinator.CoordinatorController">
+   <children>
+      <Label layoutX="50.0" layoutY="46.0" prefHeight="67.0" prefWidth="270.0" text="Coordinator Panel">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="customLabel" layoutX="85.0" layoutY="126.0" prefHeight="21.0" prefWidth="73.0" text="Label" />
+   </children>
+</AnchorPane>
