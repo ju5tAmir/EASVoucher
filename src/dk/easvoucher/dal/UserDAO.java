@@ -4,6 +4,7 @@ import dk.easvoucher.be.user.User;
 import dk.easvoucher.be.user.UserRole;
 import dk.easvoucher.dal.db.DBConnection;
 import dk.easvoucher.exeptions.ExceptionHandler;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,8 +25,11 @@ public class UserDAO implements IUserDAO{
                      "INSERT INTO users (username, hashed_password, role) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
 
+            // Hash the password using bcrypt
+            String hashedPassword = hashPassword(user.getPassword());
+
             statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
+            statement.setString(2, hashedPassword); // Save hashed password
             statement.setString(3, user.getRole().getValue());
             statement.executeUpdate();
 
@@ -38,6 +42,10 @@ public class UserDAO implements IUserDAO{
                 }
             }
         }
+    }
+    private String hashPassword(String password) {
+        // Generate a salt and hash the password using bcrypt
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
 
