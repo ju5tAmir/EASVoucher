@@ -11,7 +11,7 @@ public class DatabaseConnection {
 
     public DatabaseConnection() {
         sqlServerDataSource = new SQLServerDataSource();
-        sqlServerDataSource.setDatabaseName("CSe23B_28_LoginDB");
+        sqlServerDataSource.setDatabaseName("EventManagementSystem");
         sqlServerDataSource.setUser("CSe23B_28");
         sqlServerDataSource.setPassword("CSe2023bE28#23");
         sqlServerDataSource.setServerName("EASV-DB4");
