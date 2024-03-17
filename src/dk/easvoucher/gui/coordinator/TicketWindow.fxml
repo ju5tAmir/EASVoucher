@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="dk.easvoucher.gui.coordinator.TicketWindowController"
+            prefHeight="600.0" prefWidth="800.0">
+    <children>
+        <VBox layoutX="15.0" layoutY="15.0" spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" AnchorPane.bottomAnchor="10.0">
+            <children>
+                <TextField fx:id="ticketNumberField" promptText="Ticket Number"/>
+                <TextField fx:id="qrCodeField" promptText="QR Code"/>
+                <TextField fx:id="barcodeField" promptText="Barcode"/>
+                <TextField fx:id="uuidField" promptText="UUID"/>
+                <ComboBox fx:id="ticketTypeField" promptText="Ticket Type"/>
+                <ComboBox fx:id="eventField" promptText="Event"/>
+                <ComboBox fx:id="customerField" promptText="Customer"/>
+                <HBox spacing="10">
+                    <children>
+                        <Button text="Save" onAction="#handleSave"/>
+                        <Button text="Update" onAction="#handleUpdate"/>
+                        <Button text="Delete" onAction="#handleDelete"/>
+                        <Button text="Clear" onAction="#handleClear"/>
+                    </children>
+                </HBox>
+                <TableView fx:id="ticketsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn text="Ticket ID" fx:id="ticketIdColumn"/>
+                        <TableColumn text="Ticket Number" fx:id="ticketNumberColumn"/>
+                        <TableColumn text="QR Code" fx:id="qrCodeColumn"/>
+                        <TableColumn text="Barcode" fx:id="barcodeColumn"/>
+                        <TableColumn text="UUID" fx:id="uuidColumn"/>
+                        <TableColumn text="Ticket Type ID" fx:id="ticketTypeIdColumn"/>
+                        <TableColumn text="Event ID" fx:id="eventIdColumn"/>
+                        <TableColumn text="Customer ID" fx:id="customerIdColumn"/>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
