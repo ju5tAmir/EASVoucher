@@ -29,6 +29,20 @@ public class CreateUserController implements Initializable {
     private TextField usernameField;
     private Model model;
     private AdminController adminController; // Add a field for AdminController
+    private User selectedUser; // Add field to hold selected user
+
+    // Setter method for selected user
+    public void setUser(User user) {
+        this.selectedUser = user;
+        autofillFields();
+    }
+
+    private void autofillFields() {
+        if (selectedUser != null) {
+            usernameField.setText(selectedUser.getUsername());
+           roleChoice.setValue(selectedUser.getRole());
+        }
+    }
 
     public void setModel(Model model) {
         this.model = model;
@@ -39,16 +53,26 @@ public class CreateUserController implements Initializable {
         this.adminController = adminController;
     }
     public void saveButton(ActionEvent actionEvent) throws ExceptionHandler, SQLException {
-        String user =usernameField.getText();
-        String password = passwordField.getHideCharacter();
+        if (selectedUser != null) {
+            // Update existing user
+            String newUser = usernameField.getText();
+            String newPassword = passwordField.getHideCharacter();
+            selectedUser.setUsername(newUser);
+            selectedUser.setPassword(newPassword);
+            selectedUser.setRole(roleChoice.getValue());
+            model.updateUser(selectedUser);
+        } else {
+            // Create new user
+            String user = usernameField.getText();
+            String password = passwordField.getHideCharacter();
+            User newUser = new User(user, password, roleChoice.getValue());
+            model.createUser(newUser);
+        }
 
-        User addUser = new User(user, password, roleChoice.getValue());
-        model.createUser(addUser);
         // Call the method to update TableView in AdminController
         if (adminController != null) {
             adminController.initializeUserTable();
-        }
-        else {
+        } else {
             System.out.println("adminController null");
         }
         // Close the window

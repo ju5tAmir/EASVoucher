@@ -63,6 +63,23 @@ public class UserDAO implements IUserDAO{
             }
         }
     }
+
+    public void updateUser(User user) throws SQLException, ExceptionHandler {
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "UPDATE users SET username = ?, hashed_password = ?, role = ? WHERE id = ?")) {
+
+            // Hash the password using bcrypt
+            String hashedPassword = hashPassword(user.getPassword());
+
+            statement.setString(1, user.getUsername());
+            statement.setString(2, hashedPassword); // Save hashed password
+            statement.setString(3, user.getRole().getValue());
+            statement.setInt(4, user.getId());
+            statement.executeUpdate();
+        }
+    }
+
     @Override
     public List<User> getAllUsers() throws SQLException, ExceptionHandler {
         List<User> userList = new ArrayList<>();

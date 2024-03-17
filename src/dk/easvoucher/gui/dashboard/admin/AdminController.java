@@ -97,4 +97,33 @@ public class AdminController implements IController {
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("Role"));
     }
+
+    public void editUser(ActionEvent actionEvent) {
+        User selectedUser = userTableview.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            try {
+                // Load the FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateUser.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller instance
+                CreateUserController controller = loader.getController();
+
+                // Set the model instance to the controller
+                controller.setModel(model);
+                controller.setAdminController(this); // Set the AdminController instance
+
+                // Set the selected user to autofill the fields
+                controller.setUser(selectedUser);
+
+                // Create a new stage
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

@@ -18,7 +18,9 @@ public class UserManager {
     public void createUser(User user) throws ExceptionHandler, SQLException {
         userDAO.createUser(user);
     }
-
+    public void updateUser(User user) throws ExceptionHandler, SQLException {
+        userDAO.updateUser(user);
+    }
     public void removeUser(int id) throws ExceptionHandler, SQLException {
         userDAO.removeUser(id);
     }

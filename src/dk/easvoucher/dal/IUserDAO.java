@@ -11,6 +11,9 @@ public interface IUserDAO {
 
     void removeUser(int id) throws SQLException, ExceptionHandler;
 
+    void updateUser(User user) throws SQLException, ExceptionHandler;
+
+
     List<User> getAllUsers() throws SQLException, ExceptionHandler;
 
 }

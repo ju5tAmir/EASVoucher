@@ -111,6 +111,9 @@ public class Model {
     public void removeUser(int id) throws ExceptionHandler, SQLException {
         userManager.removeUser(id);
     }
+    public void updateUser(User user) throws ExceptionHandler, SQLException {
+        userManager.updateUser(user);
+    }
 
     public List<User> getAllUsers() throws SQLException, ExceptionHandler {
         return userManager.getAllUsers();
