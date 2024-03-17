@@ -124,7 +124,7 @@ public class AdminDAO {
         }
     }
 
-    public boolean addAccessEntry(int eventId, int coordinatorId, int assignedBy) {
+    public boolean assignCoordinator(int eventId, int coordinatorId, int assignedBy) {
         String sql = "INSERT INTO DetailedAccessManagement (EventId, CoordinatorId, AssignedBy) VALUES (?, ?, ?)";
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
