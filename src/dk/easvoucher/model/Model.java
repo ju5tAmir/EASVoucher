@@ -104,8 +104,8 @@ public class Model {
         this.ticketsList.addAll(tickets);
     }
 
-    public void createUser(User user) throws ExceptionHandler, SQLException {
-        userManager.createUser(user);
+    public void createUser(User user, String password) throws ExceptionHandler, SQLException {
+        userManager.createUser(user, password);
     }
 
     public void removeUser(int id) throws ExceptionHandler, SQLException {

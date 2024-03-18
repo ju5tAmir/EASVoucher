@@ -39,7 +39,7 @@ public class LoginController implements IController, Initializable {
      * */
     @FXML
     private void submitButton() throws IOException, ExceptionHandler {
-        // Login with the entered credentional
+        // Login with the entered credential
         model.login(usernameField.getText(), passwordField.getText());
 
         // Checks if the user logged in successfully

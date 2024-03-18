@@ -19,14 +19,14 @@ public class UserDAO implements IUserDAO{
         this.dbConnection= new DBConnection();
     }
     @Override
-    public void createUser(User user) throws SQLException, ExceptionHandler {
+    public void createUser(User user,String password) throws SQLException, ExceptionHandler {
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "INSERT INTO users (username, hashed_password, role) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Hash the password using bcrypt
-            String hashedPassword = hashPassword(user.getPassword());
+            String hashedPassword = hashPassword(password);
 
             statement.setString(1, user.getUsername());
             statement.setString(2, hashedPassword); // Save hashed password

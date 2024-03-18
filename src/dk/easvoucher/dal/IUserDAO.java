@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IUserDAO {
-    void createUser(User user) throws SQLException, ExceptionHandler;
+    void createUser(User user, String password) throws SQLException, ExceptionHandler;
 
     void removeUser(int id) throws SQLException, ExceptionHandler;
 

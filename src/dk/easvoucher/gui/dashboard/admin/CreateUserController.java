@@ -64,9 +64,9 @@ public class CreateUserController implements Initializable {
         } else {
             // Create new user
             String user = usernameField.getText();
-            String password = passwordField.getHideCharacter();
+            String password = passwordField.getText();
             User newUser = new User(user, password, roleChoice.getValue());
-            model.createUser(newUser);
+            model.createUser(newUser, password);
         }
 
         // Call the method to update TableView in AdminController

@@ -5,12 +5,15 @@ import dk.easvoucher.be.user.UserRole;
 import dk.easvoucher.exeptions.ExceptionHandler;
 import dk.easvoucher.gui.dashboard.IController;
 import dk.easvoucher.model.Model;
+import dk.easvoucher.utils.PageType;
+import dk.easvoucher.utils.WindowUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -31,8 +34,6 @@ public class AdminController implements IController {
     @FXML
     private TableView<User> userTableview;
     private Model model;
-    @FXML
-    private TableColumn<User, String> idColumn;
     @FXML
     private TableColumn<User, String> usernameColumn;
     @FXML
@@ -93,7 +94,6 @@ public class AdminController implements IController {
         }
     }
     public void initializeColumns(){
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("Role"));
     }
@@ -126,4 +126,10 @@ public class AdminController implements IController {
         }
     }
 
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        WindowUtils.createStage(primaryStage, PageType.LOGIN);
+    }
 }
