@@ -73,6 +73,8 @@ public class WindowUtils {
                 loader = new FXMLLoader(WindowUtils.class.getResource("../gui/dashboard/coordinator/CoordinatorView.fxml"));
                 break;
 
+            case CREATE_USER:
+                loader = new FXMLLoader(WindowUtils.class.getResource("../gui/dashboard/admin/CreateUser.fxml"));
             default:
                 break;
         }

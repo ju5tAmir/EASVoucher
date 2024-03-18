@@ -4,7 +4,9 @@ public enum PageType {
 
     LOGIN("login"),
     ADMIN_DASHBOARD("admin"),
-    COORDINATOR_DASHBOARD("coordinator");
+    COORDINATOR_DASHBOARD("coordinator"),
+
+    CREATE_USER("user");
 
     private final String value;
 
@@ -15,6 +17,7 @@ public enum PageType {
     PageType(String value){
         this.value = value;
     }
+
 
     // Method to get enum value by string
     public static PageType fromString(String text) {
