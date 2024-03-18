@@ -86,17 +86,18 @@ public class UserDAO implements IUserDAO{
 
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "SELECT id, username, role FROM users")) {
+                     "SELECT id, username, hashed_password, role FROM users")) {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
                     String username = resultSet.getString("username");
+                    String hashed_password = resultSet.getString("hashed_password");
                     String roleValue = resultSet.getString("role");
 
                     UserRole role = UserRole.fromString(roleValue);
 
-                    User user = new User(id, username, role);
+                    User user = new User(id, username, hashed_password, role);
                     userList.add(user);
                 }
             }

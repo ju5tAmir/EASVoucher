@@ -22,6 +22,13 @@ public class User implements IUser {
         this.role = role;
     }
 
+    public User(int id, String username, String password, UserRole role) {
+        this.id = id;
+        this.username = username;
+        this.password=password;
+        this.role = role;
+    }
+
     @Override
     public int getId() {
         return id;
