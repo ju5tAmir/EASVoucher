@@ -2,8 +2,11 @@
 package dk.easvoucher.utils;
 
 import dk.easvoucher.gui.dashboard.IController;
+import dk.easvoucher.gui.dashboard.admin.AdminController;
+import dk.easvoucher.gui.dashboard.admin.CreateUserController;
 import dk.easvoucher.model.Model;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -13,6 +16,7 @@ import java.io.IOException;
 public class WindowUtils {
 
     private static FXMLLoader loader;
+
 
 
     /**
@@ -75,6 +79,17 @@ public class WindowUtils {
 
             case CREATE_USER:
                 loader = new FXMLLoader(WindowUtils.class.getResource("../gui/dashboard/admin/CreateUser.fxml"));
+                Parent root = loader.load();
+                CreateUserController createUserController = loader.getController();
+
+                // Create an instance of AdminController and set the model
+                AdminController adminController = new AdminController();
+                adminController.setModel(model);
+
+                // Set the AdminController to the CreateUserController
+                createUserController.setAdminController(adminController);
+                createUserController.setModel(model);
+
             default:
                 break;
         }

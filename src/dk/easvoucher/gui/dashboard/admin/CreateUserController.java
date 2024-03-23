@@ -3,6 +3,7 @@ package dk.easvoucher.gui.dashboard.admin;
 import dk.easvoucher.be.user.User;
 import dk.easvoucher.be.user.UserRole;
 import dk.easvoucher.exeptions.ExceptionHandler;
+import dk.easvoucher.gui.dashboard.IController;
 import dk.easvoucher.model.Model;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import javafx.collections.FXCollections;
@@ -20,7 +21,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CreateUserController implements Initializable {
+public class CreateUserController implements Initializable, IController {
     @FXML
     private MFXPasswordField passwordField;
     @FXML
@@ -72,8 +73,6 @@ public class CreateUserController implements Initializable {
         // Call the method to update TableView in AdminController
         if (adminController != null) {
             adminController.initializeUserTable();
-        } else {
-            System.out.println("adminController null");
         }
         // Close the window
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

@@ -44,7 +44,7 @@ public class AdminController implements IController {
     public void setModel(Model model){
         this.model = model;
 
-        usernameLabel.setText(model.getUser().getUsername());
+        //usernameLabel.setText(model.getUser().getUsername());
         initializeUserTable();
         initializeColumns();
 
@@ -52,8 +52,23 @@ public class AdminController implements IController {
 
     public void createUser(ActionEvent actionEvent) throws IOException {
         //Creating stage for createUser
+        //Stage stage = new Stage();
+        //WindowUtils.createStage(stage, PageType.CREATE_USER, model);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateUser.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller instance
+        CreateUserController controller = loader.getController();
+
+        // Set the model instance to the controller
+        controller.setModel(model);
+        controller.setAdminController(this); // Set the AdminController instance
+
+
+        // Create a new stage
         Stage stage = new Stage();
-        WindowUtils.createStage(stage, PageType.CREATE_USER, model);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
     public void deleteUser(ActionEvent actionEvent) throws ExceptionHandler, SQLException {
         User selectedUser = userTableview.getSelectionModel().getSelectedItem();
