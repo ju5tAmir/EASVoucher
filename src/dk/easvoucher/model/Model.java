@@ -6,7 +6,7 @@ import dk.easvoucher.be.ticket.ITicket;
 import dk.easvoucher.be.user.IUser;
 import dk.easvoucher.be.user.User;
 import dk.easvoucher.bll.LoginLogic;
-import dk.easvoucher.bll.UserManager;
+import dk.easvoucher.bll.AdminManager;
 import dk.easvoucher.exeptions.ExceptionHandler;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -25,7 +25,7 @@ public class Model {
 
     private IUser user;
 
-    private UserManager userManager;
+    private AdminManager adminManager;
 
     /**
      * Constructor class
@@ -33,7 +33,7 @@ public class Model {
     public Model(){
         // Set login getStatus to false when the class has just instantiated
         this.loginStatus = new SimpleBooleanProperty(false);
-        this.userManager= new UserManager();
+        this.adminManager = new AdminManager();
     }
 
     /**
@@ -105,17 +105,17 @@ public class Model {
     }
 
     public void createUser(User user, String password) throws ExceptionHandler, SQLException {
-        userManager.createUser(user, password);
+        adminManager.createUser(user, password);
     }
 
     public void removeUser(int id) throws ExceptionHandler, SQLException {
-        userManager.removeUser(id);
+        adminManager.removeUser(id);
     }
     public void updateUser(User user) throws ExceptionHandler, SQLException {
-        userManager.updateUser(user);
+        adminManager.updateUser(user);
     }
 
     public List<User> getAllUsers() throws SQLException, ExceptionHandler {
-        return userManager.getAllUsers();
+        return adminManager.getAllUsers();
     }
 }
