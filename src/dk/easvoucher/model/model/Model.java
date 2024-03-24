@@ -35,8 +35,12 @@ public class Model {
         coordinatorLogic.insertTicket(ticketNumber, qrCode, barcode, UUID, ticketTypeId, eventId, customerId);
     }
 
-    public List<Ticket> getAllTickets() throws SQLException {
-        return coordinatorLogic.getAllTickets();
+    public List<Ticket> getAllTickets() {
+        try {
+            return coordinatorLogic.getAllTickets();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void updateTicket(int ticketId, String ticketNumber, String qrCode, String barcode, String UUID, Integer ticketTypeId, Integer eventId, Integer customerId) throws SQLException {

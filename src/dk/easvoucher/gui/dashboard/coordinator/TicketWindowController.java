@@ -1,5 +1,6 @@
 package dk.easvoucher.gui.dashboard.coordinator;
 
+import dk.easvoucher.be.entities.Event;
 import dk.easvoucher.be.entities.Ticket;
 import dk.easvoucher.model.model.Model;
 import javafx.collections.FXCollections;
@@ -18,10 +19,10 @@ import java.util.Map;
 
 public class TicketWindowController {
     public TextField ticketNumberField, qrCodeField, barcodeField, uuidField;
-    public ComboBox<String> ticketTypeField, eventField, customerField;
+    public ComboBox<String> ticketTypeField, eventField;
+    public ComboBox<Integer> customerField;
     private Map<String, Integer> ticketTypeMap = new HashMap<>();
-    private Map<String, Integer> eventTypeMap = new HashMap<>();
-    private Map<String, Integer> customerTypeMap = new HashMap<>();
+    private Map<String, Integer> eventNames = new HashMap<>();
     public TableView<Ticket> ticketsTable;
     public TableColumn<Ticket, Integer> ticketIdColumn;
     public TableColumn<Ticket, String> ticketNumberColumn, qrCodeColumn, barcodeColumn, uuidColumn;
@@ -38,9 +39,14 @@ public class TicketWindowController {
         ticketTypeMap.put("1st row", 4);
         ticketTypeMap.put("free beer", 5);
 
-        eventTypeMap.put("EASV Party", 1);
+        initializeEventComboBox();
+    }
 
-        customerTypeMap.put("Customer1", 1);
+    public void initializeEventComboBox() {
+        List<Event> events = model.getAllEvents();
+        for (Event event : events) {
+            eventNames.put(event.getEventName(), event.getEventId());
+        }
     }
 
     public void initialize() throws SQLException {
@@ -51,11 +57,13 @@ public class TicketWindowController {
         ObservableList<String> ticketTypes = FXCollections.observableArrayList(ticketTypeMap.keySet());
         ticketTypeField.setItems(ticketTypes);
 
-        ObservableList<String> eventTypes = FXCollections.observableArrayList(eventTypeMap.keySet());
-        eventField.setItems(eventTypes);
+        ObservableList<String> eventNameTypes = FXCollections.observableArrayList(eventNames.keySet());
+        eventField.setItems(eventNameTypes);
 
-        ObservableList<String> customers = FXCollections.observableArrayList(customerTypeMap.keySet());
-        customerField.setItems(customers);
+        List<Ticket> tickets = model.getAllTickets();
+        for (Ticket ticket : tickets) {
+            customerField.getItems().add(ticket.getCustomerId());
+        }
     }
 
 
@@ -86,10 +94,9 @@ public class TicketWindowController {
             Integer ticketTypeId = ticketTypeMap.get(ticketTypeString);
 
             String eventTypeString = eventField.getValue();
-            Integer eventId = eventTypeMap.get(eventTypeString);
+            Integer eventId = eventNames.get(eventTypeString);
 
-            String customerString = customerField.getValue();
-            Integer customerId = customerTypeMap.get(customerString);
+            Integer customerId = customerField.getValue();
 
             model.insertTicket(ticketNumber, qrCode, barcode, uuid, ticketTypeId, eventId, customerId);
             refreshTickets();
@@ -111,10 +118,9 @@ public class TicketWindowController {
                 Integer ticketTypeId = ticketTypeMap.get(ticketTypeString);
 
                 String eventTypeString = eventField.getValue();
-                Integer eventId = eventTypeMap.get(eventTypeString);
+                Integer eventId = eventNames.get(eventTypeString);
 
-                String customerString = customerField.getValue();
-                Integer customerId = customerTypeMap.get(customerString);
+                Integer customerId = customerField.getValue();
 
                 model.updateTicket(selectedTicket.getTicketId(), ticketNumber, qrCode, barcode, uuid, ticketTypeId, eventId, customerId);
                 refreshTickets();
@@ -141,12 +147,8 @@ public class TicketWindowController {
     }
 
     private void refreshTickets() {
-        try {
-            List<Ticket> tickets = model.getAllTickets();
-            ticketsTable.getItems().setAll(tickets);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<Ticket> tickets = model.getAllTickets();
+        ticketsTable.getItems().setAll(tickets);
     }
 
     private void clearForm() {
