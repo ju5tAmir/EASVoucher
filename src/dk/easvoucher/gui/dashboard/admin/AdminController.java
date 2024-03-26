@@ -44,7 +44,7 @@ public class AdminController implements IController {
     public void setModel(Model model){
         this.model = model;
 
-        //usernameLabel.setText(model.getUser().getUsername());
+        usernameLabel.setText(model.getUser().getUsername());
         initializeUserTable();
         initializeColumns();
 
@@ -52,8 +52,6 @@ public class AdminController implements IController {
 
     public void createUser(ActionEvent actionEvent) throws IOException {
         //Creating stage for createUser
-        //Stage stage = new Stage();
-        //WindowUtils.createStage(stage, PageType.CREATE_USER, model);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateUser.fxml"));
         Parent root = loader.load();
 
