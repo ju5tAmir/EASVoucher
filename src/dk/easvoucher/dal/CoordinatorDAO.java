@@ -146,4 +146,23 @@ public class CoordinatorDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void assignCoordinatorToEvent(String eventName, int coordinatorId) throws SQLException {
+        String sql = "UPDATE events SET coordinator_id = ? WHERE name = ?";
+        try (Connection conn = dbConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, coordinatorId);
+            statement.setString(2, eventName);
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Successfully assigned coordinator to event(s).");
+            } else {
+                System.out.println("No event found with the specified name.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating the event with a new coordinator: " + e.getMessage());
+            throw e;
+        } catch (ExceptionHandler e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
