@@ -3,7 +3,9 @@ package dk.easvoucher.model;
 import dk.easvoucher.be.event.Event;
 import dk.easvoucher.be.response.Response;
 import dk.easvoucher.be.ticket.ITicket;
+import dk.easvoucher.be.ticket.Ticket;
 import dk.easvoucher.be.user.IUser;
+import dk.easvoucher.bll.EventTicketLogic;
 import dk.easvoucher.bll.LoginLogic;
 import dk.easvoucher.exeptions.ExceptionHandler;
 import javafx.beans.property.BooleanProperty;
@@ -11,90 +13,97 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class Model {
-    // Instantiate the logic component of the login page.
     private LoginLogic logic = new LoginLogic();
+    private EventTicketLogic eventTicketLogic = new EventTicketLogic(); // Added reference to EventTicketLogic
     private BooleanProperty loginStatus;
     private ObservableList<Event> eventsList = FXCollections.observableArrayList();
     private ObservableList<ITicket> ticketsList = FXCollections.observableArrayList();
 
     private IUser user;
 
-    /**
-     * Constructor class
-     */
-    public Model(){
-        // Set login getStatus to false when the class has just instantiated
+    public Model() {
         this.loginStatus = new SimpleBooleanProperty(false);
     }
 
-    /**
-     * Attempts to authenticate a user with the provided credentional
-     * @param username the username of the user in plaintext
-     * @param password the password of the user in plaintext
-     */
     public void login(String username, String password) throws ExceptionHandler {
-        // Sending login credentional to program logic for authentication
         Response response = logic.login(username, password);
-
-        // Check if we got any response from logic, if not, it means the credentional were incorrect
         if (response.getStatus()) {
-            // set received data from response
             setData(response);
         }
     }
 
-
-    /**
-     * Assign username, events and tickets values
-     *
-     * @param response response
-     */
-    private void setData(Response response){
-        // Set login getStatus to true
+    private void setData(Response response) {
         setLoginStatus(response.getStatus());
-        // Set user from response
         setUser(response.getUser());
-        // get events list
         setEvents(response.getEvents());
-        // get tickets for the user
         setTickets(response.getTickets());
     }
 
-    /**
-     * set login getStatus to either true or false
-     * @param status getStatus of the login
-     */
-    private void setLoginStatus(boolean status){
+    private void setLoginStatus(boolean status) {
         loginStatus.set(status);
     }
 
-    /**
-     * get login getStatus
-     */
     public BooleanProperty getLoginStatus() {
         return loginStatus;
     }
 
-    /**
-     * get user property
-     * @return user
-     */
-    public IUser getUser(){
+    public IUser getUser() {
         return user;
     }
 
-    private void setUser(IUser user){
+    private void setUser(IUser user) {
         this.user = user;
     }
 
     private void setEvents(List<Event> events) {
+        this.eventsList.clear();
         this.eventsList.addAll(events);
     }
 
-    private void setTickets(List<ITicket> tickets){
+    public ObservableList<Event> getEvents() {
+        return eventsList;
+    }
+
+    private void setTickets(List<ITicket> tickets) {
+        this.ticketsList.clear();
         this.ticketsList.addAll(tickets);
+    }
+
+    public ObservableList<ITicket> getTickets() {
+        return ticketsList;
+    }
+
+    // Methods to transit all operations from EventTicketLogic
+
+    public void createEvent(String name, String time, String location, String notes, Integer coordinatorId, Integer adminId) throws SQLException {
+        eventTicketLogic.createEvent(name, time, location, notes, coordinatorId, adminId);
+    }
+
+    public void updateEvent(Integer eventId, String name, String time, String location, String notes, Integer coordinatorId, Integer adminId) throws SQLException {
+        eventTicketLogic.updateEvent(eventId, name, time, location, notes, coordinatorId, adminId);
+    }
+
+    public void deleteEvent(Integer eventId) throws SQLException {
+        eventTicketLogic.deleteEvent(eventId);
+    }
+
+    public void createTicket(String qrCode, String barcode, Integer typeId, Integer eventId) throws SQLException {
+        eventTicketLogic.createTicket(qrCode, barcode, typeId, eventId);
+    }
+
+    public void updateTicket(Integer ticketId, String qrCode, String barcode, Integer typeId, Integer eventId) throws SQLException {
+        eventTicketLogic.updateTicket(ticketId, qrCode, barcode, typeId, eventId);
+    }
+
+    public void deleteTicket(Integer ticketId) throws SQLException {
+        eventTicketLogic.deleteTicket(ticketId);
+    }
+
+    public void assignCoordinatorToEvent(String eventName, int coordinatorId) throws SQLException {
+        eventTicketLogic.assignCoordinatorToEvent(eventName, coordinatorId);
     }
 }
