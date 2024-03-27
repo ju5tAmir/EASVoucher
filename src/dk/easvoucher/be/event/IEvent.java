@@ -1,13 +1,13 @@
 package dk.easvoucher.be.event;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public interface IEvent {
     int getId();
-    String title();
-    String note();
-    String location();
-    LocalDate startTime();
-    LocalDate endTime();
+    String getName();
+    String getNotes();
+    String getLocation();
+    LocalDateTime getTime();
+    int getCoordinatorId();
+    int getAdminId();
 }

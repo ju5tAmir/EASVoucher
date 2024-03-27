@@ -1,25 +1,25 @@
 package dk.easvoucher.be.event;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class Event implements IEvent{
+public class Event implements IEvent {
     private int id;
-    private String title;
-    private String note;
+    private String name;
+    private LocalDateTime time;
     private String location;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String notes;
+    private int coordinatorId;
+    private int adminId;
 
-    public Event(int id, String title, String note, String location, LocalDate startDate, LocalDate endDate) {
+    public Event(int id, String name, LocalDateTime time, String location, String notes, int coordinatorId, int adminId) {
         this.id = id;
-        this.title = title;
-        this.note = note;
+        this.name = name;
+        this.time = time;
         this.location = location;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.notes = notes;
+        this.coordinatorId = coordinatorId;
+        this.adminId = adminId;
     }
-
 
     @Override
     public int getId() {
@@ -27,27 +27,32 @@ public class Event implements IEvent{
     }
 
     @Override
-    public String title() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     @Override
-    public String note() {
-        return note;
+    public LocalDateTime getTime() {
+        return time;
     }
 
     @Override
-    public String location() {
+    public String getLocation() {
         return location;
     }
 
     @Override
-    public LocalDate startTime() {
-        return startDate;
+    public String getNotes() {
+        return notes;
     }
 
     @Override
-    public LocalDate endTime() {
-        return endDate;
+    public int getCoordinatorId() {
+        return coordinatorId;
+    }
+
+    @Override
+    public int getAdminId() {
+        return adminId;
     }
 }

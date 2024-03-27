@@ -8,12 +8,22 @@ public class GiftTicket implements ITicket{
     }
 
     @Override
-    public int getEventId() {
+    public String getQrCode() {
+        return null;
+    }
+
+    @Override
+    public String getBarcode() {
+        return null;
+    }
+
+    @Override
+    public int getTypeId() {
         return 0;
     }
 
     @Override
-    public TicketType getType() {
-        return null;
+    public int getEventId() {
+        return 0;
     }
 }

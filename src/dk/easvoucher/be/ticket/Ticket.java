@@ -2,14 +2,17 @@ package dk.easvoucher.be.ticket;
 
 public class Ticket implements ITicket{
     private int id;
+    private String qrCode;
+    private String barcode;
+    private int typeId;
     private int eventId;
-    private TicketType type;
 
-
-    public Ticket(int id, int eventId, TicketType type) {
+    public Ticket(int id, String qrCode, String barcode, int typeId, int eventId) {
         this.id = id;
+        this.qrCode = qrCode;
+        this.barcode = barcode;
+        this.typeId = typeId;
         this.eventId = eventId;
-        this.type = type;
     }
 
     @Override
@@ -18,24 +21,22 @@ public class Ticket implements ITicket{
     }
 
     @Override
-    public int getEventId() {
+    public String getQrCode() {
+        return null;
+    }
+
+    @Override
+    public String getBarcode() {
+        return null;
+    }
+
+    @Override
+    public int getTypeId() {
         return 0;
     }
 
     @Override
-    public TicketType getType() {
-        return null;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
-
-    public void setType(TicketType type) {
-        this.type = type;
+    public int getEventId() {
+        return 0;
     }
 }
