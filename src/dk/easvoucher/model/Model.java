@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Model {
     private LoginLogic logic = new LoginLogic();
-    private EventTicketLogic eventTicketLogic = new EventTicketLogic(); // Added reference to EventTicketLogic
+    private EventTicketLogic eventTicketLogic = new EventTicketLogic();
     private BooleanProperty loginStatus;
     private ObservableList<Event> eventsList = FXCollections.observableArrayList();
     private ObservableList<ITicket> ticketsList = FXCollections.observableArrayList();
@@ -83,6 +83,12 @@ public class Model {
         eventTicketLogic.createEvent(name, time, location, notes, coordinatorId, adminId);
     }
 
+    public void fetchAllEvents() throws SQLException {
+        List<Event> events = eventTicketLogic.readAllEvents();
+        eventsList.clear();
+        eventsList.addAll(events);
+    }
+
     public void updateEvent(Integer eventId, String name, String time, String location, String notes, Integer coordinatorId, Integer adminId) throws SQLException {
         eventTicketLogic.updateEvent(eventId, name, time, location, notes, coordinatorId, adminId);
     }
@@ -93,6 +99,12 @@ public class Model {
 
     public void createTicket(String qrCode, String barcode, Integer typeId, Integer eventId) throws SQLException {
         eventTicketLogic.createTicket(qrCode, barcode, typeId, eventId);
+    }
+
+    public void fetchAllTickets() throws SQLException {
+        List<Ticket> tickets = eventTicketLogic.readAllTickets();
+        ticketsList.clear();
+        ticketsList.addAll(tickets);
     }
 
     public void updateTicket(Integer ticketId, String qrCode, String barcode, Integer typeId, Integer eventId) throws SQLException {
