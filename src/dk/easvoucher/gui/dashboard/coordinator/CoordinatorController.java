@@ -31,7 +31,6 @@ public class CoordinatorController implements IController {
     @Override
     public void setModel(Model model) {
         this.model = model;
-        customLabel.setText(model.getUser().getRole().getValue());
     }
 
     public void createEvent(ActionEvent event) {
