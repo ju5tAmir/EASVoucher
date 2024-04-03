@@ -9,5 +9,4 @@ public interface IEvent {
     String getLocation();
     LocalDateTime getTime();
     int getCoordinatorId();
-    int getAdminId();
 }

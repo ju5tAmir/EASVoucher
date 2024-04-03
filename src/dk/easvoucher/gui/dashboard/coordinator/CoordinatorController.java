@@ -15,7 +15,6 @@ public class CoordinatorController implements IController {
     public TextField eventLocation;
     public TextField eventNotes;
     public TextField coordinatorId;
-    public TextField adminId;
     public TextField ticketQrCode;
     public TextField ticketBarcode;
     public TextField ticketTypeId;
@@ -24,6 +23,7 @@ public class CoordinatorController implements IController {
     public TextField assignCoordinatorId;
     public TextField eventId;
     public TextField ticketId;
+    public TextField customerId;
     private Model model;
     @FXML
     private Label customLabel;
@@ -35,8 +35,8 @@ public class CoordinatorController implements IController {
 
     public void createEvent(ActionEvent event) {
         try {
-            model.createEvent(eventName.getText(), eventTime.getText(), eventLocation.getText(), eventNotes.getText(),
-                    Integer.parseInt(coordinatorId.getText()), Integer.parseInt(adminId.getText()));
+            model.createEvent(Integer.valueOf(eventId.getText()), eventName.getText(), eventTime.getText(), eventLocation.getText(), eventNotes.getText(),
+                    Integer.parseInt(coordinatorId.getText()));
             showAlert("Success", "Event created successfully.", AlertType.INFORMATION);
         } catch (Exception e) {
             showAlert("Error", "Failed to create event: " + e.getMessage(), AlertType.ERROR);
@@ -55,7 +55,7 @@ public class CoordinatorController implements IController {
     public void updateEvent(ActionEvent event) {
         try {
             model.updateEvent(Integer.parseInt(eventId.getText()), eventName.getText(), eventTime.getText(), eventLocation.getText(), eventNotes.getText(),
-                    Integer.parseInt(coordinatorId.getText()), Integer.parseInt(adminId.getText()));
+                    Integer.parseInt(coordinatorId.getText()));
             showAlert("Success", "Event updated successfully.", AlertType.INFORMATION);
         } catch (Exception e) {
             showAlert("Error", "Failed to update event: " + e.getMessage(), AlertType.ERROR);
@@ -73,8 +73,8 @@ public class CoordinatorController implements IController {
 
     public void createTicket(ActionEvent event) {
         try {
-            model.createTicket(ticketQrCode.getText(), ticketBarcode.getText(),
-                    Integer.parseInt(ticketTypeId.getText()), Integer.parseInt(ticketEventId.getText()));
+            model.createTicket(Integer.parseInt(ticketId.getText()), ticketQrCode.getText(), ticketBarcode.getText(),
+                    Integer.parseInt(ticketTypeId.getText()), Integer.parseInt(ticketEventId.getText()), Integer.valueOf(customerId.getText()));
             showAlert("Success", "Ticket created successfully.", AlertType.INFORMATION);
         } catch (Exception e) {
             showAlert("Error", "Failed to create ticket: " + e.getMessage(), AlertType.ERROR);
@@ -93,7 +93,7 @@ public class CoordinatorController implements IController {
     public void updateTicket(ActionEvent event) {
         try {
             model.updateTicket(Integer.parseInt(ticketId.getText()), ticketQrCode.getText(), ticketBarcode.getText(),
-                    Integer.parseInt(ticketTypeId.getText()), Integer.parseInt(ticketEventId.getText()));
+                    Integer.parseInt(ticketTypeId.getText()), Integer.parseInt(ticketEventId.getText()), Integer.valueOf(customerId.getText()));
             showAlert("Success", "Ticket updated successfully.", AlertType.INFORMATION);
         } catch (Exception e) {
             showAlert("Error", "Failed to update ticket: " + e.getMessage(), AlertType.ERROR);

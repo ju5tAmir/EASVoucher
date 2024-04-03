@@ -79,8 +79,8 @@ public class Model {
 
     // Methods to transit all operations from EventTicketLogic
 
-    public void createEvent(String name, String time, String location, String notes, Integer coordinatorId, Integer adminId) throws SQLException {
-        eventTicketLogic.createEvent(name, time, location, notes, coordinatorId, adminId);
+    public void createEvent(Integer event_id, String name, String time, String location, String notes, Integer coordinatorId) throws SQLException {
+        eventTicketLogic.createEvent(event_id, name, time, location, notes, coordinatorId);
     }
 
     public void fetchAllEvents() throws SQLException {
@@ -89,16 +89,16 @@ public class Model {
         eventsList.addAll(events);
     }
 
-    public void updateEvent(Integer eventId, String name, String time, String location, String notes, Integer coordinatorId, Integer adminId) throws SQLException {
-        eventTicketLogic.updateEvent(eventId, name, time, location, notes, coordinatorId, adminId);
+    public void updateEvent(Integer eventId, String name, String time, String location, String notes, Integer coordinatorId) throws SQLException {
+        eventTicketLogic.updateEvent(eventId, name, time, location, notes, coordinatorId);
     }
 
     public void deleteEvent(Integer eventId) throws SQLException {
         eventTicketLogic.deleteEvent(eventId);
     }
 
-    public void createTicket(String qrCode, String barcode, Integer typeId, Integer eventId) throws SQLException {
-        eventTicketLogic.createTicket(qrCode, barcode, typeId, eventId);
+    public void createTicket(Integer ticket_id, String qrCode, String barcode, Integer typeId, Integer eventId, Integer customer_id) throws SQLException {
+        eventTicketLogic.createTicket(ticket_id, qrCode, barcode, typeId, eventId, customer_id);
     }
 
     public void fetchAllTickets() throws SQLException {
@@ -107,8 +107,8 @@ public class Model {
         ticketsList.addAll(tickets);
     }
 
-    public void updateTicket(Integer ticketId, String qrCode, String barcode, Integer typeId, Integer eventId) throws SQLException {
-        eventTicketLogic.updateTicket(ticketId, qrCode, barcode, typeId, eventId);
+    public void updateTicket(Integer ticketId, String qrCode, String barcode, Integer typeId, Integer eventId, Integer customer_id) throws SQLException {
+        eventTicketLogic.updateTicket(ticketId, qrCode, barcode, typeId, eventId, customer_id);
     }
 
     public void deleteTicket(Integer ticketId) throws SQLException {

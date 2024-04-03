@@ -6,4 +6,5 @@ public interface ITicket {
     String getBarcode();
     int getTypeId(); // Adjusted from TicketType getType() to match the database schema
     int getEventId();
+    int getCustomerId();
 }

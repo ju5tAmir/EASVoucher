@@ -26,4 +26,9 @@ public class GiftTicket implements ITicket{
     public int getEventId() {
         return 0;
     }
+
+    @Override
+    public int getCustomerId() {
+        return 0;
+    }
 }

@@ -21,27 +21,25 @@ public class CoordinatorDAO {
     }
 
     // Create an Event
-    public void createEvent(String name, String time, String location, String notes, Integer coordinatorId, Integer adminId) throws SQLException {
-        String sql = "INSERT INTO events (name, time, location, notes, coordinator_id, admin_id) VALUES (?, ?, ?, ?, ?, ?)";
+    public void createEvent(Integer event_id, String name, String time, String location, String notes, Integer coordinatorId) throws SQLException {
+        String sql = "INSERT INTO events (event_id, name, time, location, notes, coordinator_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = dbConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, name);
-            statement.setString(2, time);
-            statement.setString(3, location);
-            statement.setString(4, notes);
-            statement.setInt(5, coordinatorId);
-            statement.setInt(6, adminId);
+            statement.setInt(1, event_id);
+            statement.setString(2, name);
+            statement.setString(3, time);
+            statement.setString(4, location);
+            statement.setString(5, notes);
+            statement.setInt(6, coordinatorId);
             statement.executeUpdate();
         } catch (ExceptionHandler e) {
             throw new RuntimeException(e);
         }
     }
 
-    // Read all Events
     public List<Event> readAllEvents() throws SQLException {
         List<Event> events = new ArrayList<>();
         String sql = "SELECT * FROM events";
         try (Connection conn = dbConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(sql); ResultSet resultSet = statement.executeQuery()) {
-            // Inside your readAllEvents() method, adjusting the Event creation:
             while (resultSet.next()) {
                 Event event = new Event(
                         resultSet.getInt("event_id"),
@@ -49,8 +47,8 @@ public class CoordinatorDAO {
                         resultSet.getTimestamp("time").toLocalDateTime(),
                         resultSet.getString("location"),
                         resultSet.getString("notes"),
-                        resultSet.getInt("coordinator_id"),
-                        resultSet.getInt("admin_id"));
+                        resultSet.getInt("coordinator_id")
+                );
                 events.add(event);
             }
         } catch (ExceptionHandler e) {
@@ -59,17 +57,17 @@ public class CoordinatorDAO {
         return events;
     }
 
+
     // Update an Event
-    public void updateEvent(Integer eventId, String name, String time, String location, String notes, Integer coordinatorId, Integer adminId) throws SQLException {
-        String sql = "UPDATE events SET name = ?, time = ?, location = ?, notes = ?, coordinator_id = ?, admin_id = ? WHERE event_id = ?";
+    public void updateEvent(Integer eventId, String name, String time, String location, String notes, Integer coordinatorId) throws SQLException {
+        String sql = "UPDATE events SET name = ?, time = ?, location = ?, notes = ?, coordinator_id = ? WHERE event_id = ?";
         try (Connection conn = dbConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, name);
             statement.setString(2, time);
             statement.setString(3, location);
             statement.setString(4, notes);
             statement.setInt(5, coordinatorId);
-            statement.setInt(6, adminId);
-            statement.setInt(7, eventId);
+            statement.setInt(6, eventId);
             statement.executeUpdate();
         } catch (ExceptionHandler e) {
             throw new RuntimeException(e);
@@ -88,13 +86,15 @@ public class CoordinatorDAO {
     }
 
     // Create a Ticket
-    public void createTicket(String qrCode, String barcode, Integer typeId, Integer eventId) throws SQLException {
-        String sql = "INSERT INTO tickets (qr_code, barcode, type_id, event_id) VALUES (?, ?, ?, ?)";
+    public void createTicket(Integer ticket_id, String qrCode, String barcode, Integer typeId, Integer eventId, Integer customer_id) throws SQLException {
+        String sql = "INSERT INTO tickets (ticket_id, qr_code, barcode, type_id, event_id, customer_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = dbConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, qrCode);
-            statement.setString(2, barcode);
-            statement.setInt(3, typeId);
-            statement.setInt(4, eventId);
+            statement.setInt(1, ticket_id);
+            statement.setString(2, qrCode);
+            statement.setString(3, barcode);
+            statement.setInt(4, typeId);
+            statement.setInt(5, eventId);
+            statement.setInt(6, customer_id);
             statement.executeUpdate();
         } catch (ExceptionHandler e) {
             throw new RuntimeException(e);
@@ -105,14 +105,19 @@ public class CoordinatorDAO {
     public List<Ticket> readAllTickets() throws SQLException {
         List<Ticket> tickets = new ArrayList<>();
         String sql = "SELECT * FROM tickets";
-        try (Connection conn = dbConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(sql); ResultSet resultSet = statement.executeQuery()) {
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
             while (resultSet.next()) {
                 Ticket ticket = new Ticket(
                         resultSet.getInt("ticket_id"),
                         resultSet.getString("qr_code"),
                         resultSet.getString("barcode"),
                         resultSet.getInt("type_id"),
-                        resultSet.getInt("event_id"));
+                        resultSet.getInt("event_id"),
+                        resultSet.getInt("customer_id")
+                );
                 tickets.add(ticket);
             }
         } catch (ExceptionHandler e) {
@@ -122,14 +127,15 @@ public class CoordinatorDAO {
     }
 
     // Update a Ticket
-    public void updateTicket(Integer ticketId, String qrCode, String barcode, Integer typeId, Integer eventId) throws SQLException {
-        String sql = "UPDATE tickets SET qr_code = ?, barcode = ?, type_id = ?, event_id = ? WHERE ticket_id = ?";
+    public void updateTicket(Integer ticketId, String qrCode, String barcode, Integer typeId, Integer eventId, Integer customerId) throws SQLException {
+        String sql = "UPDATE tickets SET qr_code = ?, barcode = ?, type_id = ?, event_id = ?, customer_id = ? WHERE ticket_id = ?";
         try (Connection conn = dbConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, qrCode);
             statement.setString(2, barcode);
             statement.setInt(3, typeId);
             statement.setInt(4, eventId);
-            statement.setInt(5, ticketId);
+            statement.setInt(5, customerId);
+            statement.setInt(6, ticketId);
             statement.executeUpdate();
         } catch (ExceptionHandler e) {
             throw new RuntimeException(e);

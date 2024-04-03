@@ -3,52 +3,59 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.coordinator.CoordinatorController">
-   <VBox spacing="10">
+   <HBox spacing="10">
       <padding>
          <Insets top="10" right="10" bottom="10" left="10"/>
       </padding>
-      <TitledPane text="Manage Events" collapsible="false">
-         <VBox spacing="10">
-            <padding>
-               <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <TextField fx:id="eventId" promptText="Event Id"/>
-            <TextField fx:id="eventName" promptText="Event Name"/>
-            <TextField fx:id="eventTime" promptText="Event Time"/>
-            <TextField fx:id="eventLocation" promptText="Location"/>
-            <TextField fx:id="eventNotes" promptText="Notes"/>
-            <TextField fx:id="coordinatorId" promptText="Coordinator ID"/>
-            <TextField fx:id="adminId" promptText="Admin ID"/>
-            <Button text="Create Event" onAction="#createEvent"/>
-            <Button text="Fetch All Events" onAction="#fetchAllEvents"/>
-            <Button text="Update Event" onAction="#updateEvent"/>
-            <Button text="Delete Event" onAction="#deleteEvent"/>
-            <Label text="Assign Coordinator to Event"/>
-            <TextField fx:id="assignEventName" promptText="Event Name"/>
-            <TextField fx:id="assignCoordinatorId" promptText="Coordinator ID"/>
-            <Button text="Assign Coordinator" onAction="#assignCoordinatorToEvent"/>
-         </VBox>
-      </TitledPane>
-      <TitledPane text="Manage Tickets" collapsible="false">
-         <VBox spacing="10">
-            <padding>
-               <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <TextField fx:id="ticketId" promptText="Ticket Id"/>
-            <TextField fx:id="ticketQrCode" promptText="QR Code"/>
-            <TextField fx:id="ticketBarcode" promptText="Barcode"/>
-            <TextField fx:id="ticketTypeId" promptText="Type ID"/>
-            <TextField fx:id="ticketEventId" promptText="Event ID"/>
-            <Button text="Create Ticket" onAction="#createTicket"/>
-            <Button text="Fetch All Tickets" onAction="#fetchAllTickets"/>
-            <Button text="Update Ticket" onAction="#updateTicket"/>
-            <Button text="Delete Ticket" onAction="#deleteTicket"/>
-         </VBox>
-      </TitledPane>
-   </VBox>
+      <!-- Event Management Section -->
+      <VBox spacing="10">
+         <TitledPane text="Manage Events" collapsible="false">
+            <VBox spacing="10">
+               <padding>
+                  <Insets top="10" right="10" bottom="10" left="10"/>
+               </padding>
+               <TextField fx:id="eventId" promptText="Event Id"/>
+               <TextField fx:id="eventName" promptText="Event Name"/>
+               <TextField fx:id="eventTime" promptText="Event Time"/>
+               <TextField fx:id="eventLocation" promptText="Location"/>
+               <TextField fx:id="eventNotes" promptText="Notes"/>
+               <TextField fx:id="coordinatorId" promptText="Coordinator ID"/>
+               <Button text="Create Event" onAction="#createEvent"/>
+               <Button text="Fetch All Events" onAction="#fetchAllEvents"/>
+               <Button text="Update Event" onAction="#updateEvent"/>
+               <Button text="Delete Event" onAction="#deleteEvent"/>
+               <Label text="Assign Coordinator to Event"/>
+               <TextField fx:id="assignEventName" promptText="Event Name"/>
+               <TextField fx:id="assignCoordinatorId" promptText="Coordinator ID"/>
+               <Button text="Assign Coordinator" onAction="#assignCoordinatorToEvent"/>
+            </VBox>
+         </TitledPane>
+      </VBox>
+      <!-- Ticket Management Section -->
+      <VBox spacing="10">
+         <TitledPane text="Manage Tickets" collapsible="false">
+            <VBox spacing="10">
+               <padding>
+                  <Insets top="10" right="10" bottom="10" left="10"/>
+               </padding>
+               <TextField fx:id="ticketId" promptText="Ticket Id"/>
+               <TextField fx:id="ticketQrCode" promptText="QR Code"/>
+               <TextField fx:id="ticketBarcode" promptText="Barcode"/>
+               <TextField fx:id="ticketTypeId" promptText="Type ID"/>
+               <TextField fx:id="ticketEventId" promptText="Event ID"/>
+               <TextField fx:id="customerId" promptText="Customer ID"/>
+               <Button text="Create Ticket" onAction="#createTicket"/>
+               <Button text="Fetch All Tickets" onAction="#fetchAllTickets"/>
+               <Button text="Update Ticket" onAction="#updateTicket"/>
+               <Button text="Delete Ticket" onAction="#deleteTicket"/>
+            </VBox>
+         </TitledPane>
+      </VBox>
+   </HBox>
 </AnchorPane>
