@@ -1,10 +1,12 @@
 package dk.easvoucher.be.user;
 
-import dk.easvoucher.utils.PageType;
+
 
 public enum UserRole {
     ADMIN("admin"),
-    COORDINATOR("coordinator");
+    COORDINATOR("coordinator"),
+
+    BARTENDER("bartender");
 
     private final String value;
     public String getValue(){

@@ -1,15 +1,21 @@
+
 package dk.easvoucher.utils;
 
 import dk.easvoucher.gui.dashboard.IController;
+import dk.easvoucher.gui.dashboard.admin.AdminController;
+import dk.easvoucher.gui.dashboard.admin.CreateUserController;
 import dk.easvoucher.model.Model;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 
 public class WindowUtils {
+
     private static FXMLLoader loader;
+
 
 
     /**
@@ -28,6 +34,8 @@ public class WindowUtils {
             case ADMIN_DASHBOARD:
                 // Initiate new FXMLLoader with admin dashboard
                 loader = new FXMLLoader(WindowUtils.class.getResource("../gui/dashboard/admin/AdminView.fxml"));
+
+
                 break;
 
             case COORDINATOR_DASHBOARD:
@@ -68,11 +76,13 @@ public class WindowUtils {
                 loader = new FXMLLoader(WindowUtils.class.getResource("../gui/dashboard/coordinator/CoordinatorView.fxml"));
                 break;
 
+
             default:
                 break;
         }
         // Initiate new Scene based on loaded FXML file
         Scene scene = new Scene(loader.load());
+
         // Set loaded scene into stage
         stage.setScene(scene);
         // Show the stage

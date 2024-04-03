@@ -1,6 +1,7 @@
 package dk.easvoucher.dal.db;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dk.easvoucher.exeptions.AlertHandler;
 import dk.easvoucher.exeptions.ExceptionHandler;

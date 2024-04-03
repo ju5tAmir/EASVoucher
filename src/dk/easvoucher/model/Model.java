@@ -6,7 +6,9 @@ import dk.easvoucher.be.ticket.ITicket;
 import dk.easvoucher.be.ticket.Ticket;
 import dk.easvoucher.be.user.IUser;
 import dk.easvoucher.bll.EventTicketLogic;
+import dk.easvoucher.be.user.User;
 import dk.easvoucher.bll.LoginLogic;
+import dk.easvoucher.bll.AdminManager;
 import dk.easvoucher.exeptions.ExceptionHandler;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -24,9 +26,15 @@ public class Model {
     private ObservableList<ITicket> ticketsList = FXCollections.observableArrayList();
 
     private IUser user;
+    private AdminManager adminManager;
 
-    public Model() {
+    /**
+     * Constructor class
+     */
+    public Model(){
+        // Set login getStatus to false when the class has just instantiated
         this.loginStatus = new SimpleBooleanProperty(false);
+        this.adminManager = new AdminManager();
     }
 
     public void login(String username, String password) throws ExceptionHandler {
@@ -117,5 +125,20 @@ public class Model {
 
     public void assignCoordinatorToEvent(String eventName, int coordinatorId) throws SQLException {
         eventTicketLogic.assignCoordinatorToEvent(eventName, coordinatorId);
+    }
+}
+    public void createUser(User user, String password) throws ExceptionHandler, SQLException {
+        adminManager.createUser(user, password);
+    }
+
+    public void removeUser(int id) throws ExceptionHandler, SQLException {
+        adminManager.removeUser(id);
+    }
+    public void updateUser(User user) throws ExceptionHandler, SQLException {
+        adminManager.updateUser(user);
+    }
+
+    public List<User> getAllUsers() throws SQLException, ExceptionHandler {
+        return adminManager.getAllUsers();
     }
 }

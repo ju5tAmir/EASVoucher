@@ -2,6 +2,9 @@ package dk.easvoucher.be.event;
 
 import java.time.LocalDateTime;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Event implements IEvent {
     private int id;
     private String name;

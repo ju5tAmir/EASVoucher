@@ -1,5 +1,6 @@
 package dk.easvoucher.be.ticket;
 
+
 public class Ticket implements ITicket{
     private int id;
     private String qrCode;

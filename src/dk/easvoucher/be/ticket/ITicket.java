@@ -1,5 +1,6 @@
 package dk.easvoucher.be.ticket;
 
+
 public interface ITicket {
     int getId();
     String getQrCode();
