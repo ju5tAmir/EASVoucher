@@ -24,6 +24,15 @@ public class Event implements IEvent {
         this.adminId = adminId;
     }
 
+    public Event(int id, String name, LocalDateTime time, String location, String notes, int coordinatorId) {
+        this.id = id;
+        this.name = name;
+        this.time = time;
+        this.location = location;
+        this.notes = notes;
+        this.coordinatorId = coordinatorId;
+    }
+
     @Override
     public int getId() {
         return id;

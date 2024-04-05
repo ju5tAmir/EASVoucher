@@ -97,6 +97,11 @@ public class Model {
         eventsList.addAll(events);
     }
 
+    /*public List<Event> readAllEvents() throws SQLException {
+        List<Event> allEvents = eventTicketLogic.readAllEvents();
+        return allEvents;
+    }*/
+
     public void updateEvent(Integer eventId, String name, String time, String location, String notes, Integer coordinatorId, Integer adminId) throws SQLException {
         eventTicketLogic.updateEvent(eventId, name, time, location, notes, coordinatorId, adminId);
     }
@@ -126,7 +131,7 @@ public class Model {
     public void assignCoordinatorToEvent(String eventName, int coordinatorId) throws SQLException {
         eventTicketLogic.assignCoordinatorToEvent(eventName, coordinatorId);
     }
-}
+
     public void createUser(User user, String password) throws ExceptionHandler, SQLException {
         adminManager.createUser(user, password);
     }
@@ -140,5 +145,8 @@ public class Model {
 
     public List<User> getAllUsers() throws SQLException, ExceptionHandler {
         return adminManager.getAllUsers();
+    }
+    public List<Event> getAllEvents() throws SQLException, ExceptionHandler {
+        return eventTicketLogic.getAllEvents();
     }
 }

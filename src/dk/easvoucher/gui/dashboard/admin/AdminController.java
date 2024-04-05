@@ -1,5 +1,6 @@
 package dk.easvoucher.gui.dashboard.admin;
 
+import dk.easvoucher.be.event.Event;
 import dk.easvoucher.be.user.User;
 import dk.easvoucher.be.user.UserRole;
 import dk.easvoucher.exeptions.ExceptionHandler;
@@ -16,9 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -26,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminController implements IController {
@@ -38,6 +38,16 @@ public class AdminController implements IController {
     private TableColumn<User, String> usernameColumn;
     @FXML
     private TableColumn<User, UserRole> roleColumn;
+    @FXML
+    private TableView<Event> eventsTable;
+    @FXML
+    private TableColumn nameColumn;
+    @FXML
+    private TableColumn timeColumn;
+    @FXML
+    private TableColumn locationColumn;
+    @FXML
+    private TableColumn notesColumn;
 
 
     @Override
@@ -47,7 +57,26 @@ public class AdminController implements IController {
         usernameLabel.setText(model.getUser().getUsername());
         initializeUserTable();
         initializeColumns();
+        initializeEventsTableColumns();
+        initializeEventsTable();
 
+    }
+
+    private void initializeEventsTableColumns() {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("Time"));
+        notesColumn.setCellValueFactory(new PropertyValueFactory<>("Notes"));
+    }
+    public void initializeEventsTable() {
+        try {
+            List<Event> eventsList = model.getAllEvents();
+            ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventsList);
+            eventsTable.setItems(observableEventList);
+        }
+        catch (SQLException | ExceptionHandler e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void createUser(ActionEvent actionEvent) throws IOException {
@@ -70,12 +99,28 @@ public class AdminController implements IController {
     }
     public void deleteUser(ActionEvent actionEvent) throws ExceptionHandler, SQLException {
         User selectedUser = userTableview.getSelectionModel().getSelectedItem();
-        model.removeUser(selectedUser.getId());
-        initializeUserTable();
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setHeaderText("Confirm Deletion");
+        confirmationAlert.setContentText("Are you sure you want to delete this user?");
+
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            model.removeUser(selectedUser.getId());
+            initializeUserTable();
+        }
     }
-    public void deleteEvent(ActionEvent actionEvent) {
+    public void deleteEvent(ActionEvent actionEvent) throws SQLException {
+        Event selectedEvent = eventsTable.getSelectionModel().getSelectedItem();
 
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setHeaderText("Confirm Deletion");
+        confirmationAlert.setContentText("Are you sure you want to delete this event?");
 
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            model.deleteEvent(selectedEvent.getId());
+            initializeEventsTable();
+        }
     }
 
     public void initializeUserTable() {

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="625.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.admin.AdminController">
+<AnchorPane prefHeight="625.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.admin.AdminController">
     <children>
         <Label layoutX="19.0" layoutY="14.0" text="Admin Panel">
             <font>
@@ -26,10 +26,12 @@
       <Label fx:id="usernameLabel" layoutX="17.0" layoutY="73.0" />
       <Label layoutX="25.0" layoutY="133.0" text="Users" />
       <Label layoutX="431.0" layoutY="133.0" text="Events" />
-      <TableView layoutX="429.0" layoutY="165.0" prefHeight="367.0" prefWidth="376.0">
+      <TableView fx:id="eventsTable" layoutX="429.0" layoutY="165.0" prefHeight="367.0" prefWidth="423.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="nameColumn" prefWidth="104.0" text="Name" />
+            <TableColumn fx:id="timeColumn" prefWidth="107.0" text="Time" />
+            <TableColumn fx:id="locationColumn" prefWidth="79.0" text="Location" />
+            <TableColumn fx:id="notesColumn" prefWidth="127.0" text="Notes" />
         </columns>
       </TableView>
       <Button layoutX="125.0" layoutY="568.0" mnemonicParsing="false" onAction="#editUser" prefHeight="26.0" prefWidth="86.0" text="Edit User" />
