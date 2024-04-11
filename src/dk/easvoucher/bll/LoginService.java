@@ -1,6 +1,7 @@
 package dk.easvoucher.bll;
 
 import dk.easvoucher.be.response.Response;
+import dk.easvoucher.be.user.Employee;
 import dk.easvoucher.dal.LoginHandler;
 import dk.easvoucher.exeptions.ExceptionHandler;
 
@@ -29,5 +30,19 @@ public class LoginLogic {
         return response;
     }
 
+    public Employee getEmployee(String username, String password) throws ExceptionHandler {
+        auth(username, password);
+        return null;
+    }
 
+
+    private boolean auth(String username, String password) throws ExceptionHandler{
+
+        loginHandler.auth(username, password);
+        return true;
+
+    }
+
+//    public Employee getEmployee(String username, String password) {
+//    }
 }

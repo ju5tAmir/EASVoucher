@@ -18,12 +18,17 @@ public class User implements IUser {
     }
 
     @Override
-    public String getUsername() {
-        return username;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public UserRole getRole() {
         return role;
+    }
+
+    @Override
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }
