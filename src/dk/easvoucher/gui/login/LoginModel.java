@@ -1,18 +1,19 @@
-package dk.easvoucher.model;
+package dk.easvoucher.gui.login;
 
 import dk.easvoucher.be.user.Employee;
 import dk.easvoucher.bll.LoginService;
 import dk.easvoucher.exeptions.ExceptionHandler;
 
 import javafx.beans.property.SimpleObjectProperty;
-public class Model {
+public class LoginModel {
     private final LoginService loginService = new LoginService();
     private final SimpleObjectProperty<Employee> loggedInEmployee = new SimpleObjectProperty<>();
 
     /**
-     * Constructor class
+     * Default constructor for LoginModel.
+     *
      */
-    public Model(){
+    public LoginModel(){
     }
 
     /**
@@ -41,10 +42,10 @@ public class Model {
 
     /**
      * Sets the logged-in employee.
+     *
      * @param employee the employee object to set as logged-in.
      */
     private void setLoggedInEmployee(Employee employee){
         this.loggedInEmployee.set(employee);
     }
-
 }

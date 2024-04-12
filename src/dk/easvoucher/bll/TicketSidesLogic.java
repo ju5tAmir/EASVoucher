@@ -1,10 +1,16 @@
 package dk.easvoucher.bll;
 
-import javafx.embed.swing.SwingFXUtils;
+import dk.easvoucher.be.event.Event;
+import dk.easvoucher.be.event.Note;
+import dk.easvoucher.be.ticket.Item;
+import dk.easvoucher.be.ticket.Ticket;
+import dk.easvoucher.exeptions.ExceptionHandler;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.VBox;
 import net.glxn.qrgen.javase.QRCode;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
@@ -12,17 +18,18 @@ import net.sourceforge.barbecue.BarcodeFactory;
 import net.sourceforge.barbecue.BarcodeImageHandler;
 import net.sourceforge.barbecue.output.OutputException;
 
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TicketViewLogic {
+public class TicketSidesLogic {
 
     // TODO: Implement Facade design pattern for Barcode, Qrcode, also use a single library
 
     public Image createQRCode(String text){
         // Creates QRCode for the provided UUID
-        ByteArrayOutputStream out = QRCode.from(text).withSize(500, 500).stream();
+        ByteArrayOutputStream out = QRCode.from("http://164.90.238.69:5000/uuid?value=" +text).withSize(500, 500).stream();
         Image image = new Image(new ByteArrayInputStream(out.toByteArray()));
         // The default created image has white background, so we need to remove white pixels
         return makeImageTransparent(image);
@@ -81,4 +88,45 @@ public class TicketViewLogic {
         return writableImage;
     }
 
+    public List<Label> getNoteLabelForEvent(Event event) throws ExceptionHandler {
+        List<Label> labels = new ArrayList<>();
+        for (Note note: event.getNotes()){
+            Label label = new Label();
+            label.setText("[+] " + note.getNote());
+            label.setWrapText(false);
+            label.setMaxWidth(200);
+            labels.add(label);
+        }
+        return labels;
+    }
+
+    public VBox getEventNotesVBox(Event event) {
+        VBox vbox = new VBox();
+        vbox.setMaxWidth(400);
+        vbox.setPrefWidth(400);
+        for (Note note: event.getNotes()){
+            Label label = new Label();
+            label.setText("[+] " + note.getNote());
+            label.setWrapText(true);
+            label.setMaxWidth(400);
+            label.setStyle("-fx-font-family: 'Hack'; -fx-font-size: 14;");
+            vbox.getChildren().add(label);
+        }
+        return vbox;
+    }
+
+    public VBox getTicketItemsVBox(Ticket ticket) {
+        VBox vbox = new VBox();
+        vbox.setMaxWidth(250);
+        vbox.setPrefWidth(250);
+        for (Item item: ticket.getItems()){
+            Label label = new Label();
+            label.setText("[+] " + item.getTitle());
+            label.setWrapText(true);
+            label.setMaxWidth(250);
+            label.setStyle("-fx-font-family: 'Hack'; -fx-font-size: 14;");
+            vbox.getChildren().add(label);
+        }
+        return vbox;
+    }
 }

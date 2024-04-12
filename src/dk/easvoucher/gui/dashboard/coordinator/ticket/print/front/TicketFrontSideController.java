@@ -1,4 +1,4 @@
-package dk.easvoucher.gui.dashboard.coordinator.ticket.print;
+package dk.easvoucher.gui.dashboard.coordinator.ticket.print.front;
 
 import dk.easvoucher.bll.TicketSidesLogic;
 import dk.easvoucher.exeptions.ExceptionHandler;

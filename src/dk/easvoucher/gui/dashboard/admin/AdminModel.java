@@ -1,2 +1,4 @@
-package dk.easvoucher.gui.dashboard.admin;public class AdminModel {
+package dk.easvoucher.gui.dashboard.admin;
+
+public class AdminModel {
 }

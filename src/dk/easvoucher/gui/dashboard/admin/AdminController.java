@@ -1,21 +1,21 @@
 package dk.easvoucher.gui.dashboard.admin;
 
 import dk.easvoucher.gui.dashboard.IController;
-import dk.easvoucher.model.Model;
+import dk.easvoucher.gui.login.LoginModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class AdminController implements IController {
+public class AdminController implements IController<LoginModel> {
     @FXML
     private Label usernameLabel;
-
-    private Model model;
+    private LoginModel loginModel;
 
     @Override
-    public void setModel(Model model){
-        this.model = model;
-
-        usernameLabel.setText(model.getUser().getUsername());
+    public void setModel(LoginModel loginModel){
+        this.loginModel = loginModel;
+        usernameLabel.setText("Welcome " + loginModel.getLoggedInEmployee().getUsername());
     }
+
+
 
 }

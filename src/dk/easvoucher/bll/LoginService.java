@@ -1,48 +1,31 @@
 package dk.easvoucher.bll;
 
-import dk.easvoucher.be.response.Response;
 import dk.easvoucher.be.user.Employee;
-import dk.easvoucher.dal.LoginHandler;
+import dk.easvoucher.dal.LoginDAO;
 import dk.easvoucher.exeptions.ExceptionHandler;
 
-public class LoginLogic {
+public class LoginService {
+    private final LoginDAO loginDAO;
 
-    private LoginHandler loginHandler;
-    private Response response;
-
-    public LoginLogic(){
-
-        this.loginHandler = new LoginHandler();
-        this.response = new Response();
+    /**
+     * Constructs a new LoginService instance.
+     * Initializes the LoginHandler for managing user authentication.
+     */
+    public LoginService(){
+        // Initializes the LoginHandler for managing user authentication.
+        this.loginDAO = new LoginDAO();
     }
 
     /**
-     * Authenticate with provided username and password
-     * @param username username
-     * @param password password
-     * @return Response with StatusCode, User Object, EventsList, TicketsList
+     * Authenticates the user by provided credentials.
+     *
+     * @param username The username of the user attempting to authenticate.
+     * @param password The password of the user attempting to authenticate.
+     * @return An employee object representing the authenticated user.
+     * @throws ExceptionHandler If an error occurs during the authentication process.
      */
-    public Response login(String username, String password) throws ExceptionHandler {
-        // Login with credentials
-        response = loginHandler.handleLogin(username, password);
-
-        // return response
-        return response;
-    }
-
     public Employee getEmployee(String username, String password) throws ExceptionHandler {
-        auth(username, password);
-        return null;
+        // Perform authentication using the provided credentials
+        return loginDAO.loginAuth(username, password);
     }
-
-
-    private boolean auth(String username, String password) throws ExceptionHandler{
-
-        loginHandler.auth(username, password);
-        return true;
-
-    }
-
-//    public Employee getEmployee(String username, String password) {
-//    }
 }
