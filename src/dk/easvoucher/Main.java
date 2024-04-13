@@ -21,8 +21,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-//        AdminDAO a = new AdminDAO();
-//        System.out.println(a.createEmployee("test1", "test", UserRole.ADMIN));
+        AdminDAO a = new AdminDAO();
+        System.out.println(a.getAllEvents());
 
         // Create and show the stage for Login page
          WindowUtils.createStage(primaryStage, PageType.LOGIN);

@@ -1,5 +1,6 @@
 package dk.easvoucher.gui.dashboard.admin;
 
+import dk.easvoucher.be.event.Event;
 import dk.easvoucher.be.user.Employee;
 import dk.easvoucher.be.user.UserRole;
 import dk.easvoucher.bll.AdminLogic;
@@ -15,6 +16,8 @@ import javafx.collections.ObservableList;
 public class AdminModel {
     private final SimpleObjectProperty<Employee> admin = new SimpleObjectProperty<>();
     private final ObservableList<Employee> employees = FXCollections.observableArrayList();
+
+    private final ObservableList<Event> events = FXCollections.observableArrayList();
 
     AdminLogic logic = new AdminLogic();
 
@@ -44,5 +47,15 @@ public class AdminModel {
     public void removeUser(Employee employee) throws ExceptionHandler{
         logic.removeUser(employee);
         employees.remove(employee);
+    }
+
+    public ObservableList<Event> getAllEvents() throws ExceptionHandler{
+        this.events.setAll(logic.getAllEvents());
+        return events;
+    }
+
+    public void deleteEvent(Event event) throws  ExceptionHandler{
+        logic.removeEvent(event);
+        events.remove(event);
     }
 }

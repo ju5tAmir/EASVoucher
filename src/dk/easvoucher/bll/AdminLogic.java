@@ -1,5 +1,6 @@
 package dk.easvoucher.bll;
 
+import dk.easvoucher.be.event.Event;
 import dk.easvoucher.be.user.Employee;
 import dk.easvoucher.be.user.UserRole;
 import dk.easvoucher.dal.AdminDAO;
@@ -25,5 +26,13 @@ public class AdminLogic {
 
     public void removeUser(Employee employee) throws ExceptionHandler {
         dao.removeEmployee(employee);
+    }
+
+    public List<Event> getAllEvents() throws ExceptionHandler{
+        return dao.getAllEvents();
+    }
+
+    public void removeEvent(Event event) throws ExceptionHandler {
+        dao.removeEvent(event);
     }
 }

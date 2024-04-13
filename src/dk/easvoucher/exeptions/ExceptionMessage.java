@@ -23,6 +23,7 @@ public enum ExceptionMessage {
     INCORRECT_PASSWORD("The password you entered is incorrect."),
     ERROR_IN_CREATING_USER("An error occured while creating new user."),
     ERROR_IN_REMOVING_USER("An error occured while removing the user."),
+    ERROR_IN_REMOVING_EVENT("An error occured while removing the event."),
     USER_CREATED_SUCCESSFULLY("User created successfully."),
     USER_REMOVED_SUCCESSFULLY("User removed successfully");
 

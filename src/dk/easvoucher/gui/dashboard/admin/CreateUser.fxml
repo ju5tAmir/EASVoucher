@@ -6,7 +6,9 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<!--        /**-->
+<!--        * author: <a href="https://github.com/NilIQW">Nil</a>-->
+<!--        */-->
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.admin.CreateUserController">
    <children>
       <Label layoutX="98.0" layoutY="123.0" text="Username:" />

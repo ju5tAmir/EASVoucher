@@ -1,5 +1,6 @@
 package dk.easvoucher.dal;
 
+import dk.easvoucher.be.event.Event;
 import dk.easvoucher.be.user.Employee;
 import dk.easvoucher.be.user.UserRole;
 import dk.easvoucher.dal.db.DBConnection;
@@ -27,7 +28,6 @@ public class AdminDAO {
         // List to store all employees
         List<Employee> employees = new ArrayList<>();
 
-        // SQL query to retrieve all customers first_name's
         String query = "SELECT *" +
                 " FROM Employees";
 
@@ -105,4 +105,88 @@ public class AdminDAO {
         }
     }
 
+    public List<Event> getAllEvents() throws ExceptionHandler {
+        // List to store all Events
+        List<Event> events = new ArrayList<>();
+
+        String query = "SELECT *" +
+                " FROM Events";
+
+        try (PreparedStatement statement = conn.prepareStatement(query))
+        {
+            // Execute the query
+            ResultSet resultSet = statement.executeQuery();
+
+            // Check if we got any answer from sql server
+            while (resultSet.next()){
+                // Event object to add into final list
+                Event event = new Event();
+                // Get first_name from results set
+                event.setId(resultSet.getInt("id"));
+                event.setName(resultSet.getString("title"));
+                event.setLocation(resultSet.getString("location"));
+                event.setStartTime(resultSet.getTime("start_time"));
+
+                // Add the retrieved name to names list
+                events.add(event);
+            }
+            return events;
+
+        } catch (SQLException ex) {
+            // Connection to database failed, throw exception and message
+            throw new ExceptionHandler(
+                    ExceptionMessage.DB_CONNECTION_FAILURE.getValue()
+                            + "\n"
+                            + ex.getMessage());
+        }
+    }
+
+    public void removeEvent(Event event) throws ExceptionHandler {
+        String[] deleteQueries = {
+                "DELETE FROM EventNotes WHERE event_id = ?",
+                "DELETE FROM EventCoordinators WHERE event_id = ?",
+                "DELETE FROM EventTickets WHERE event_id = ?",
+                "DELETE FROM SuperTicket WHERE event_id = ?",
+                "DELETE FROM TicketItems WHERE ticket_id IN (SELECT id FROM Tickets WHERE event_id = ?)",
+                "DELETE FROM Tickets WHERE event_id = ?",
+                "DELETE FROM Events WHERE id = ?"
+        };
+
+        try {
+            conn.setAutoCommit(false);
+
+            // Execute each delete query with batch
+            for (String query : deleteQueries) {
+                try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                    // Set event ID parameter
+                    preparedStatement.setInt(1, event.getId());
+                    // Add query to the batch
+                    preparedStatement.addBatch();
+                    // Execute the batch
+                    preparedStatement.executeBatch();
+                }
+            }
+
+            conn.commit();
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException rollbackEx) {
+                // Log or handle the rollback exception
+                System.out.println(rollbackEx.getMessage());
+            }
+
+            throw new ExceptionHandler(
+                    ExceptionMessage.DB_CONNECTION_FAILURE.getValue() +
+                            "\n" +
+                            ex.getMessage());
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+            } catch (SQLException setAutoCommitEx) {
+                // Log or handle the exception
+                System.out.println(setAutoCommitEx.getMessage());
+            }
+        }
+    }
 }
