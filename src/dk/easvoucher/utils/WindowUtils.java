@@ -111,6 +111,7 @@ public class WindowUtils {
             case CREATE_TICKET -> "../gui/dashboard/coordinator/ticket/create/CreateTicket.fxml";
             case TICKET_FRONT_SIDE -> "../gui/dashboard/coordinator/ticket/print/front/Ticket-Frontside.fxml";
             case TICKET_BACK_SIDE -> "../gui/dashboard/coordinator/ticket/print/Ticket-Backside.fxml";
+            case CREATE_USER -> "../gui/dashboard/admin/CreateUser.fxml";
 
             // Throws an illegal file exception if none of the files matches to the requested page type
             default -> throw new ExceptionHandler(ExceptionMessage.ILLEGAL_FILE.getValue());

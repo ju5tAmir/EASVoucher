@@ -8,7 +8,8 @@ public enum PageType {
     BARTENDER_DASHBOARD("bartender"),
     CREATE_TICKET("create_ticket"),
     TICKET_FRONT_SIDE("ticket_front_side"),
-    TICKET_BACK_SIDE("ticket_back_side");
+    TICKET_BACK_SIDE("ticket_back_side"),
+    CREATE_USER("create_user");
 
     private final String value;
 

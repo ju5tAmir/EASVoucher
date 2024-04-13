@@ -21,6 +21,10 @@ public class AlertHandler {
     }
 
 
-
+    public static void displayInformation(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }

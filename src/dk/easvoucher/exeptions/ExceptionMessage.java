@@ -20,7 +20,11 @@ public enum ExceptionMessage {
     PHONE_NULL("Phone number value cannot be null or empty"),
     SELECT_A_TICKET("Please select the ticket you want to delete."),
     SELECT_AN_EVENT("Please select the event you want to delete."),
-    INCORRECT_PASSWORD("The password you entered is incorrect.");
+    INCORRECT_PASSWORD("The password you entered is incorrect."),
+    ERROR_IN_CREATING_USER("An error occured while creating new user."),
+    ERROR_IN_REMOVING_USER("An error occured while removing the user."),
+    USER_CREATED_SUCCESSFULLY("User created successfully."),
+    USER_REMOVED_SUCCESSFULLY("User removed successfully");
 
 
 
