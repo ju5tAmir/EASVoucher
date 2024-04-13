@@ -74,11 +74,10 @@ public class LoginController implements Initializable, IController  {
 
         // close the current  stage
         WindowUtils.closeStage(stageToClose);
-        }
+    }
 
     @Override
     public void setModel(Object model) {
 
     }
 }
-

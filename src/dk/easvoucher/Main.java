@@ -4,6 +4,7 @@ import dk.easvoucher.utils.WindowUtils;
 import dk.easvoucher.utils.PageType;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class Main extends Application {
     // TODO 1: Don't forget to add coordinator creator to EventCoordinators table in database when creating a new Event

@@ -1,21 +1,174 @@
 package dk.easvoucher.gui.dashboard.admin;
 
+import dk.easvoucher.be.event.Event;
+import dk.easvoucher.be.user.User;
+import dk.easvoucher.be.user.UserRole;
+import dk.easvoucher.exeptions.ExceptionHandler;
 import dk.easvoucher.gui.dashboard.IController;
-import dk.easvoucher.gui.login.LoginModel;
+import dk.easvoucher.model.Model;
+import dk.easvoucher.utils.PageType;
+import dk.easvoucher.utils.WindowUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
-public class AdminController implements IController<LoginModel> {
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+public class AdminController implements IController {
     @FXML
     private Label usernameLabel;
-    private LoginModel loginModel;
+    @FXML
+    private TableView<User> userTableview;
+    private Model model;
+    @FXML
+    private TableColumn<User, String> usernameColumn;
+    @FXML
+    private TableColumn<User, UserRole> roleColumn;
+    @FXML
+    private TableView<Event> eventsTable;
+    @FXML
+    private TableColumn nameColumn;
+    @FXML
+    private TableColumn timeColumn;
+    @FXML
+    private TableColumn locationColumn;
+    @FXML
+    private TableColumn notesColumn;
+
 
     @Override
-    public void setModel(LoginModel loginModel){
-        this.loginModel = loginModel;
-        usernameLabel.setText("Welcome " + loginModel.getLoggedInEmployee().getUsername());
+    public void setModel(Model model){
+        this.model = model;
+
+        usernameLabel.setText(model.getUser().getUsername());
+        initializeUserTable();
+        initializeColumns();
+        initializeEventsTableColumns();
+        initializeEventsTable();
+
     }
 
+    private void initializeEventsTableColumns() {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("Time"));
+        notesColumn.setCellValueFactory(new PropertyValueFactory<>("Notes"));
+    }
+    public void initializeEventsTable() {
+        try {
+            List<Event> eventsList = model.getAllEvents();
+            ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventsList);
+            eventsTable.setItems(observableEventList);
+        }
+        catch (SQLException | ExceptionHandler e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void createUser(ActionEvent actionEvent) throws IOException {
+        //Creating stage for createUser
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateUser.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller instance
+        CreateUserController controller = loader.getController();
+
+        // Set the model instance to the controller
+        controller.setModel(model);
+        controller.setAdminController(this); // Set the AdminController instance
 
 
+        // Create a new stage
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    public void deleteUser(ActionEvent actionEvent) throws ExceptionHandler, SQLException {
+        User selectedUser = userTableview.getSelectionModel().getSelectedItem();
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setHeaderText("Confirm Deletion");
+        confirmationAlert.setContentText("Are you sure you want to delete this user?");
+
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            model.removeUser(selectedUser.getId());
+            initializeUserTable();
+        }
+    }
+    public void deleteEvent(ActionEvent actionEvent) throws SQLException {
+        Event selectedEvent = eventsTable.getSelectionModel().getSelectedItem();
+
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setHeaderText("Confirm Deletion");
+        confirmationAlert.setContentText("Are you sure you want to delete this event?");
+
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            model.deleteEvent(selectedEvent.getId());
+            initializeEventsTable();
+        }
+    }
+
+    public void initializeUserTable() {
+        try {
+            List<User> userList = model.getAllUsers();
+            ObservableList<User> observableUserList = FXCollections.observableArrayList(userList);
+            userTableview.setItems(observableUserList);
+        } catch (SQLException | ExceptionHandler e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void initializeColumns(){
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
+        roleColumn.setCellValueFactory(new PropertyValueFactory<>("Role"));
+    }
+
+    public void editUser(ActionEvent actionEvent) {
+        User selectedUser = userTableview.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            try {
+                // Load the FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateUser.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller instance
+                CreateUserController controller = loader.getController();
+
+                // Set the model instance to the controller
+                controller.setModel(model);
+                controller.setAdminController(this); // Set the AdminController instance
+
+                // Set the selected user to autofill the fields
+                controller.setUser(selectedUser);
+
+                // Create a new stage
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        WindowUtils.createStage(primaryStage, PageType.LOGIN);
+    }
 }
