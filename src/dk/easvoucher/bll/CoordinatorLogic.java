@@ -55,12 +55,18 @@ public class CoordinatorLogic {
         // Create label for start date
         Label startTime = new Label("Start Time: " + event.getStartTime().toString());
         labels.add(startTime);
+
         // Create label for start date (If any)
+        if (event.getEndDate() != null) {
         Label endDate = new Label("End Date: " + event.getStartDate().toString());
         labels.add(endDate);
+        }
+
         // Create label for start date (If any)
-        Label endTime = new Label("End Time: " + event.getEndTime().toString());
-        labels.add(endTime);
+        if (event.getEndTime() != null) {
+            Label endTime = new Label("End Time: " + event.getEndTime().toString());
+            labels.add(endTime);
+        }
 
         // Iterate over notes (If any)
         for (int n=1; n <= event.getNotes().size(); n++){

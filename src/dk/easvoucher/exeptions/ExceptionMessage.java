@@ -25,7 +25,16 @@ public enum ExceptionMessage {
     ERROR_IN_REMOVING_USER("An error occured while removing the user."),
     ERROR_IN_REMOVING_EVENT("An error occured while removing the event."),
     USER_CREATED_SUCCESSFULLY("User created successfully."),
-    USER_REMOVED_SUCCESSFULLY("User removed successfully");
+    USER_REMOVED_SUCCESSFULLY("User removed successfully"),
+    EVENT_NAME_EMPTY("Event name cannot be empty."),
+    EVENT_LOCATION_EMPTY("Event location cannot be empty."),
+    EVENT_START_DATE_EMPTY("Event start date cannot be empty."),
+    EVENT_START_TIME_EMPTY("Event start time cannot be empty."),
+    EMPTY_NOTE_TITLE("You cannot submit a note with empty title"),
+    SELECT_NOTE_FIRST("In order to remove a note, you need to select the note first."),
+    ERROR_IN_CREATING_EVENT("An error occurred in creating the event."),
+    EVENT_CREATION_SUCCESSFUL("Event created successfully.")
+    ;
 
 
 
