@@ -7,6 +7,7 @@ public enum PageType {
     COORDINATOR_DASHBOARD("coordinator"),
     BARTENDER_DASHBOARD("bartender"),
     CREATE_TICKET("create_ticket"),
+    CREATE_EVENT("create_event"),
     TICKET_FRONT_SIDE("ticket_front_side"),
     TICKET_BACK_SIDE("ticket_back_side"),
     CREATE_USER("create_user");

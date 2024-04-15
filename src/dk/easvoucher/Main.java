@@ -2,6 +2,7 @@ package dk.easvoucher;
 
 import dk.easvoucher.be.user.UserRole;
 import dk.easvoucher.dal.AdminDAO;
+import dk.easvoucher.dal.CreateEventDAO;
 import dk.easvoucher.utils.WindowUtils;
 import dk.easvoucher.utils.PageType;
 import javafx.application.Application;
@@ -20,9 +21,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        AdminDAO a = new AdminDAO();
-        System.out.println(a.getAllEvents());
 
         // Create and show the stage for Login page
          WindowUtils.createStage(primaryStage, PageType.LOGIN);

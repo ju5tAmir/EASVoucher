@@ -102,5 +102,7 @@ public class CoordinatorModel {
         tickets.remove(ticket);
     }
 
-//    public void addTicketToEvent()
+    public void addEventToList(Event event){
+        events.add(event);
+    }
 }

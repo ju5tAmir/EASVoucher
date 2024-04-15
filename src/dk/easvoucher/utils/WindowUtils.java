@@ -109,6 +109,7 @@ public class WindowUtils {
             case COORDINATOR_DASHBOARD -> "../gui/dashboard/coordinator/CoordinatorView.fxml";
             case BARTENDER_DASHBOARD -> "../gui/dashboard/bartender/BartenderView.fxml";
             case CREATE_TICKET -> "../gui/dashboard/coordinator/ticket/create/CreateTicket.fxml";
+            case CREATE_EVENT -> "../gui/dashboard/coordinator/event/create/CreateEventView.fxml";
             case TICKET_FRONT_SIDE -> "../gui/dashboard/coordinator/ticket/print/front/Ticket-Frontside.fxml";
             case TICKET_BACK_SIDE -> "../gui/dashboard/coordinator/ticket/print/Ticket-Backside.fxml";
             case CREATE_USER -> "../gui/dashboard/admin/CreateUser.fxml";

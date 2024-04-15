@@ -105,7 +105,11 @@ public class CoordinatorController implements IController<LoginModel>, Initializ
 
 
     @FXML
-    private void createEventButton(ActionEvent actionEvent) {
+    private void createEventButton(ActionEvent actionEvent) throws ExceptionHandler {
+        // New Stage for create event window
+        Stage stage = new Stage();
+
+        WindowUtils.createStage(stage, PageType.CREATE_EVENT, model, Modality.APPLICATION_MODAL);
     }
 
     @FXML
