@@ -4,14 +4,16 @@ public class Employee implements IUser {
     private int id;
     private String username;
     private UserRole role;
+    private String password;
 
     public Employee(){
 
     }
 
-    public Employee(int id, String username, UserRole role){
+    public Employee(int id, String username, String password, UserRole role){
         this.id = id;
         this.username = username;
+        this.password=password;
         this.role = role;
     }
 
@@ -38,6 +40,14 @@ public class Employee implements IUser {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

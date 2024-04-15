@@ -105,6 +105,25 @@ public class AdminDAO {
         }
     }
 
+    public void updateEmployee(Employee employee) throws ExceptionHandler {
+        String query = "UPDATE Employees SET username = ?, password = ?, role = ? WHERE id = ?";
+
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, employee.getUsername());
+            statement.setString(2, employee.getPassword());
+            statement.setString(3, employee.getRole().getValue());
+            statement.setInt(4, employee.getId());
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new ExceptionHandler(ExceptionMessage.ERROR_IN_UPDATING_USER.getValue());
+            }
+        } catch (SQLException ex) {
+            throw new ExceptionHandler(ExceptionMessage.DB_CONNECTION_FAILURE.getValue() + "\n" + ex.getMessage());
+        }
+    }
+
+
     public List<Event> getAllEvents() throws ExceptionHandler {
         // List to store all Events
         List<Event> events = new ArrayList<>();
