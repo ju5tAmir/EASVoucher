@@ -10,10 +10,9 @@ public class Employee implements IUser {
 
     }
 
-    public Employee(int id, String username, String password, UserRole role){
+    public Employee(int id, String username, UserRole role){
         this.id = id;
         this.username = username;
-        this.password=password;
         this.role = role;
     }
 
@@ -42,13 +41,6 @@ public class Employee implements IUser {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {

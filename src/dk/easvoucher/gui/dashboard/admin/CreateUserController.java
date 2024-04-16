@@ -60,10 +60,10 @@ public class CreateUserController implements Initializable, IController<AdminMod
         if (selectedUser != null) {
             try {
                 // Update the selected user with new information
+                String newPassword = passwordField.getText();
                 selectedUser.setUsername(usernameField.getText());
                 selectedUser.setRole(roleChoice.getValue());
-                selectedUser.setPassword(passwordField.getText());
-                model.updateUser(selectedUser);
+                model.updateUser(selectedUser, newPassword);
 
                 AlertHandler.displayInformation(ExceptionMessage.USER_UPDATED_SUCCESSFULLY.getValue());
 
