@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="github.alexdlaird.java.ngrok" type="repository">
+    <properties maven-id="com.github.alexdlaird:java-ngrok:2.3.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/java-ngrok-2.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gson-2.10.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/snakeyaml-2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

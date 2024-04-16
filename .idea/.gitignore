@@ -6,3 +6,6 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# Ignore config.properties
+../src/dk/easvoucher/dal/db/config.properties
