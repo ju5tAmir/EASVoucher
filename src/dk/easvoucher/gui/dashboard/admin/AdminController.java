@@ -50,22 +50,15 @@ public class AdminController implements IController<LoginModel> {
     private TableColumn locationColumn;
 
 
-
-
-
     @Override
     public void setModel(LoginModel loginModel){
         this.model = new AdminModel();
         this.model.setAdmin(loginModel.getLoggedInEmployee());
 
-
         initializeUserTable();
         initializeColumns();
         initializeEventsTableColumns();
         initializeEventsTable();
-
-
-
     }
 
     private void initializeEventsTableColumns() {

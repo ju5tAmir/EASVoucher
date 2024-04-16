@@ -77,5 +77,6 @@
       <Line endX="871.5" endY="-548.5" layoutX="-374.0" layoutY="710.0" startX="871.5" startY="-12.5" />
       <ListView fx:id="eventInfoBox" layoutX="40.0" layoutY="478.0" prefHeight="200.0" prefWidth="406.0" />
       <ListView fx:id="ticketInfoBox" layoutX="553.0" layoutY="478.0" prefHeight="200.0" prefWidth="406.0" />
+      <Button layoutX="898.0" layoutY="37.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
    </children>
 </AnchorPane>
