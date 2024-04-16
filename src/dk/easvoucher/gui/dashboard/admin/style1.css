@@ -1,0 +1,37 @@
+.pane{
+    -fx-background-color: #dad5d5; /* Background color */
+
+}
+.neumorphic-button {
+    -fx-background-color: #cbc7c7; /* Background color */
+    -fx-background-radius: 20; /* Border radius */
+    -fx-border-radius: 20;
+    -fx-border-color: #c2bebe; /* Border color */
+    -fx-border-width: 1; /* Border width */
+    -fx-padding: 8 8; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+}
+.neumorphic-table-view {
+    -fx-background-color: #d2cece; /* Background color */
+    -fx-background-radius: 6 6 0 0; /* Border radius: top-left, top-right, bottom-right, bottom-left */
+    -fx-border-radius: 6 6 0 0;
+    -fx-border-color: #cbc7c7; /* Border color */
+    -fx-border-width: 1; /* Border width */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+}
+
+.neumorphic-table-view .column-header,
+.neumorphic-table-view .table-cell {
+    -fx-background-color: #ccc8c8; /* Header background color */
+    -fx-border-color: #c7c3c3;
+    -fx-border-radius: 6;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+}
+
+/* Reset default cell background color */
+.neumorphic-table-view .table-cell {
+    -fx-background-color: #d3d0d0; /* or -fx-background-color: null; */
+    -fx-border-radius: 0;
+}

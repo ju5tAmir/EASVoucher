@@ -34,8 +34,6 @@ import java.util.Optional;
  */
 public class AdminController implements IController<LoginModel> {
     @FXML
-    private Label usernameLabel;
-    @FXML
     private TableView<Employee> userTableview;
     private AdminModel model;
     @FXML
@@ -65,6 +63,8 @@ public class AdminController implements IController<LoginModel> {
         initializeColumns();
         initializeEventsTableColumns();
         initializeEventsTable();
+
+
 
     }
 
