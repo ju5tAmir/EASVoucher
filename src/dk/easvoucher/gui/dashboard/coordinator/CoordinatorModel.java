@@ -1,6 +1,7 @@
 package dk.easvoucher.gui.dashboard.coordinator;
 
 import dk.easvoucher.be.event.Event;
+import dk.easvoucher.be.event.Note;
 import dk.easvoucher.be.ticket.ITicket;
 import dk.easvoucher.be.ticket.Ticket;
 import dk.easvoucher.be.user.Employee;
@@ -11,6 +12,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CoordinatorModel {
     // List of available(allowed) events for the coordinator
@@ -103,6 +107,6 @@ public class CoordinatorModel {
     }
 
     public void addEventToList(Event event){
-        events.add(event);
+        events.set(events.indexOf(selectedEvent.get()) ,event);
     }
 }

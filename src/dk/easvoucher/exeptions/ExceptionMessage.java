@@ -8,7 +8,7 @@ public enum ExceptionMessage {
     ILLEGAL_FILE("Illegal file operation."),
     FXML_LOAD_ERROR("Error loading FXML file."),
     INVALID_SUGGESTION_PARAMETER("You entered suggestion type is invalid."),
-    NO_EVENT_SELECTED("You need to select an event, in order to create a ticket."),
+    NO_EVENT_SELECTED("Please select an event first on order to continue."),
     INSERTION_FAILED("There is a problem with inserting data into the database."),
     CUSTOMER_INSERTION_FAILED("Inserting customer into the database has failed."),
     KEY_GENERATION_FAILURE("No keys were generated."),
@@ -26,8 +26,6 @@ public enum ExceptionMessage {
     ERROR_IN_REMOVING_EVENT("An error occured while removing the event."),
     USER_CREATED_SUCCESSFULLY("User created successfully."),
     USER_REMOVED_SUCCESSFULLY("User removed successfully"),
-    USER_UPDATED_SUCCESSFULLY("User updated successfully"),
-    ERROR_IN_UPDATING_USER("An error occured while editing the user"),
     EVENT_NAME_EMPTY("Event name cannot be empty."),
     EVENT_LOCATION_EMPTY("Event location cannot be empty."),
     EVENT_START_DATE_EMPTY("Event start date cannot be empty."),
@@ -35,7 +33,11 @@ public enum ExceptionMessage {
     EMPTY_NOTE_TITLE("You cannot submit a note with empty title"),
     SELECT_NOTE_FIRST("In order to remove a note, you need to select the note first."),
     ERROR_IN_CREATING_EVENT("An error occurred in creating the event."),
-    EVENT_CREATION_SUCCESSFUL("Event created successfully.")
+    EVENT_CREATION_SUCCESSFUL("Event created successfully."),
+    EVENT_UPDATED_SUCCESSFULLY("Event updated successfully."),
+    EVENT_UPDATE_ERROR("An error occurred while trying to update the event."),
+    USER_UPDATED_SUCCESSFULLY("User updated successfully"),
+    ERROR_IN_UPDATING_USER("An error occured while editing the user"),
     ;
 
 
