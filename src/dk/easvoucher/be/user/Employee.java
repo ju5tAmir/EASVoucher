@@ -6,7 +6,6 @@ public class Employee implements IUser {
     private int id;
     private String username;
     private UserRole role;
-    private String password;
 
     public Employee(){
 
@@ -42,7 +41,6 @@ public class Employee implements IUser {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
     @Override
     public String toString() {
