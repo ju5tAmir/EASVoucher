@@ -26,6 +26,8 @@ public enum ExceptionMessage {
     ERROR_IN_REMOVING_EVENT("An error occured while removing the event."),
     USER_CREATED_SUCCESSFULLY("User created successfully."),
     USER_REMOVED_SUCCESSFULLY("User removed successfully"),
+    USER_UPDATED_SUCCESSFULLY("User updated successfully"),
+    ERROR_IN_UPDATING_USER("An error occured while editing the user"),
     EVENT_NAME_EMPTY("Event name cannot be empty."),
     EVENT_LOCATION_EMPTY("Event location cannot be empty."),
     EVENT_START_DATE_EMPTY("Event start date cannot be empty."),

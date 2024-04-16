@@ -49,6 +49,10 @@ public class AdminModel {
         employees.remove(employee);
     }
 
+    public void updateUser(Employee employee, String newPassword) throws ExceptionHandler {
+        logic.updateUser(employee, newPassword);
+    }
+
     public ObservableList<Event> getAllEvents() throws ExceptionHandler{
         this.events.setAll(logic.getAllEvents());
         return events;

@@ -25,6 +25,8 @@ public class Main extends Application {
         // Create and show the stage for Login page
          WindowUtils.createStage(primaryStage, PageType.LOGIN);
 
+
+
     }
 
     public static void main(String[] args) {

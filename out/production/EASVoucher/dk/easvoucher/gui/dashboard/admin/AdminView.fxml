@@ -1,42 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
 <!--        /**-->
 <!--        * author: <a href="https://github.com/NilIQW">Nil</a>-->
 <!--        */-->
-<AnchorPane prefHeight="625.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.admin.AdminController">
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.admin.AdminController">
     <children>
-        <Label layoutX="19.0" layoutY="14.0" text="Admin Panel">
-            <font>
-                <Font size="27.0" />
-            </font>
-        </Label>
-        <Button layoutX="25.0" layoutY="568.0" mnemonicParsing="false" onAction="#createUser" text="Create User" />
-        <Button layoutX="425.0" layoutY="568.0" mnemonicParsing="false" onAction="#deleteEvent" text="Delete Event" />
-        <Button layoutX="228.0" layoutY="568.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
-        <TableView fx:id="userTableview" layoutX="25.0" layoutY="167.0" prefHeight="367.0" prefWidth="286.0">
-            <columns>
-                <TableColumn fx:id="usernameColumn" prefWidth="168.0" text="Username" />
-            <TableColumn fx:id="roleColumn" prefWidth="113.0" text="Role" />
-            </columns>
-        </TableView>
-      <Label fx:id="usernameLabel" layoutX="17.0" layoutY="73.0" />
-      <Label layoutX="25.0" layoutY="133.0" text="Users" />
-      <Label layoutX="431.0" layoutY="133.0" text="Events" />
-      <TableView fx:id="eventsTable" layoutX="429.0" layoutY="165.0" prefHeight="367.0" prefWidth="423.0">
-        <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="104.0" text="Name" />
-            <TableColumn fx:id="timeColumn" prefWidth="107.0" text="Time" />
-            <TableColumn fx:id="locationColumn" prefWidth="210.0" text="Location" />
-        </columns>
-      </TableView>
-      <Button layoutX="125.0" layoutY="568.0" mnemonicParsing="false" onAction="#editUser" prefHeight="26.0" prefWidth="86.0" text="Edit User" />
-      <Button layoutX="744.0" layoutY="34.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+      <VBox layoutX="-1.0" layoutY="73.0" prefHeight="700.0" prefWidth="390.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <Label text="Admin Panel" textFill="#656262">
+                  <font>
+                      <Font size="27.0" />
+                  </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="17.0" />
+               </VBox.margin>
+              </Label>
+            <Label text="Users" textFill="#656262">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+              <TableView fx:id="userTableview" prefHeight="500.0" prefWidth="350.0" styleClass="neumorphic-table-view">
+                  <columns>
+                      <TableColumn fx:id="usernameColumn" prefWidth="160.0" styleClass="neumorphic-table-cell" text="Username" />
+                  <TableColumn fx:id="roleColumn" prefWidth="152.0" styleClass="neumorphic-table-cell" text="Role" />
+                  </columns>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="30.0" />
+               </VBox.margin>
+              </TableView>
+            <HBox>
+               <children>
+                    <Button mnemonicParsing="false" onAction="#createUser" prefHeight="40.0" prefWidth="105.0" styleClass="neumorphic-button" text="Create User">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                    <Button mnemonicParsing="false" onAction="#deleteUser" prefHeight="40.0" prefWidth="76.0" styleClass="neumorphic-button" text="Delete..">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#editUser" prefHeight="40.0" prefWidth="86.0" styleClass="neumorphic-button" text="Edit..">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="30.0" right="17.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_RIGHT" layoutX="356.0" layoutY="-1.0" prefHeight="700.0" prefWidth="510.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="72.0" styleClass="neumorphic-button" text="Log Out">
+               <VBox.margin>
+                  <Insets bottom="10.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Label text="Events" textFill="#656262" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="10.0" right="405.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TableView fx:id="eventsTable" prefHeight="500.0" styleClass="neumorphic-table-view">
+              <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="146.0" styleClass="neumorphic-table-cell" text="Name" />
+                  <TableColumn fx:id="timeColumn" prefWidth="97.0" styleClass="neumorphic-table-cell" text="Time" />
+                  <TableColumn fx:id="locationColumn" prefWidth="185.0" styleClass="neumorphic-table-cell" text="Location" />
+              </columns>
+               <VBox.margin>
+                  <Insets bottom="20.0" right="20.0" />
+               </VBox.margin>
+            </TableView>
+            <HBox>
+               <VBox.margin>
+                  <Insets bottom="10.0" right="20.0" />
+               </VBox.margin>
+               <children>
+                    <Button mnemonicParsing="false" onAction="#deleteEvent" prefHeight="40.0" prefWidth="94.0" styleClass="neumorphic-button" text="Delete Event" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="30.0" right="30.0" />
+         </padding>
+      </VBox>
 
     </children>
 </AnchorPane>

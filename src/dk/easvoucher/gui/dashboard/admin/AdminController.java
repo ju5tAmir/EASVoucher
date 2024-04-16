@@ -30,11 +30,9 @@ import java.util.Optional;
 
 
 /**
- * Author: Niloofar (<a href="https://github.com/NilIQW">...</a>)
+ * Author: Nilofar (<a href="https://github.com/NilIQW">...</a>)
  */
 public class AdminController implements IController<LoginModel> {
-    @FXML
-    private Label usernameLabel;
     @FXML
     private TableView<Employee> userTableview;
     private AdminModel model;
@@ -52,19 +50,15 @@ public class AdminController implements IController<LoginModel> {
     private TableColumn locationColumn;
 
 
-
-
     @Override
     public void setModel(LoginModel loginModel){
         this.model = new AdminModel();
         this.model.setAdmin(loginModel.getLoggedInEmployee());
 
-
         initializeUserTable();
         initializeColumns();
         initializeEventsTableColumns();
         initializeEventsTable();
-
     }
 
     private void initializeEventsTableColumns() {
@@ -89,6 +83,29 @@ public class AdminController implements IController<LoginModel> {
 
         WindowUtils.createStage(stage, PageType.CREATE_USER, model, Modality.WINDOW_MODAL);
 
+    }
+    public void editUser(ActionEvent actionEvent) throws IOException {
+        Employee selectedUser = userTableview.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            //Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateUser.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller instance
+            CreateUserController controller = loader.getController();
+            controller.setUserTableView(userTableview);
+
+            // Set the model instance to the controller
+            controller.setModel(model);
+
+            // Set the selected user to autofill the fields
+            controller.setSelectedUser(selectedUser);
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
     }
     public void deleteUser(ActionEvent actionEvent) throws ExceptionHandler, SQLException {
         Employee selectedUser = userTableview.getSelectionModel().getSelectedItem();
@@ -130,31 +147,6 @@ public class AdminController implements IController<LoginModel> {
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
     }
-
-    public void editUser(ActionEvent actionEvent) {
-        Employee selectedUser = userTableview.getSelectionModel().getSelectedItem();
-        if (selectedUser != null) {
-            // Load the FXML file
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateUser.fxml"));
-//                Parent root = loader.load();
-//
-//                // Get the controller instance
-//                CreateUserController controller = loader.getController();
-//
-//                // Set the model instance to the controller
-//                controller.setModel(model);
-//                controller.setAdminController(this); // Set the AdminController instance
-//
-//                // Set the selected user to autofill the fields
-//                controller.setUser(selectedUser);
-//
-//                // Create a new stage
-//                Stage stage = new Stage();
-//                stage.setScene(new Scene(root));
-//                stage.show();
-        }
-    }
-
     public void logOut(ActionEvent actionEvent) throws IOException, ExceptionHandler {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();

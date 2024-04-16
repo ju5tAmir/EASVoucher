@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -258,4 +259,10 @@ public class CoordinatorController implements IController<LoginModel>, Initializ
     }
 
 
+    public void logOut(ActionEvent actionEvent) throws ExceptionHandler {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        WindowUtils.createStage(primaryStage, PageType.LOGIN);
+    }
 }

@@ -27,6 +27,9 @@ public class AdminLogic {
     public void removeUser(Employee employee) throws ExceptionHandler {
         dao.removeEmployee(employee);
     }
+    public void updateUser(Employee employee, String newPassword) throws ExceptionHandler {
+        dao.updateEmployee(employee, newPassword);
+    }
 
     public List<Event> getAllEvents() throws ExceptionHandler{
         return dao.getAllEvents();

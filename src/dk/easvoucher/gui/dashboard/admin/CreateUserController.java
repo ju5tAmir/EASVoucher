@@ -15,9 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.springframework.ui.Model;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,24 +31,59 @@ public class CreateUserController implements Initializable, IController<AdminMod
     @FXML
     private TextField usernameField;
     private AdminModel model;
+    private Employee selectedUser;
+    @FXML
+    private TableView<Employee> userTableview;
+    public void setUserTableView(TableView<Employee> userTableview) {
+        this.userTableview = userTableview;
+    }
 
+    private void refreshUserTableView() throws ExceptionHandler {
+        if (userTableview != null) {
+            userTableview.getItems().clear();
+            userTableview.getItems().addAll(model.getEmployees());
+        }
+    }
+
+    public void setSelectedUser(Employee selectedUser) {
+        this.selectedUser = selectedUser;
+        usernameField.setText(selectedUser.getUsername());
+        passwordField.setText("");
+        roleChoice.setValue(selectedUser.getRole());
+    }
 
     /**
      * author: <a href="https://github.com/NilIQW">Nil</a>
      */
     public void saveButton(ActionEvent actionEvent) throws ExceptionHandler, SQLException {
+        // Check if selectedUser is null or not
+        if (selectedUser != null) {
+            try {
+                // Update the selected user with new information
+                String newPassword = passwordField.getText();
+                selectedUser.setUsername(usernameField.getText());
+                selectedUser.setRole(roleChoice.getValue());
+                model.updateUser(selectedUser, newPassword);
 
-        try {
+                AlertHandler.displayInformation(ExceptionMessage.USER_UPDATED_SUCCESSFULLY.getValue());
+
+                userTableview.refresh();
+                // Close the window
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                stage.close();
+            } catch (ExceptionHandler exceptionHandler) {
+                AlertHandler.displayErrorAlert(exceptionHandler.getMessage());
+            }
+        } else {
             model.addUser(usernameField.getText(), passwordField.getText(), roleChoice.getValue());
-
             AlertHandler.displayInformation(ExceptionMessage.USER_CREATED_SUCCESSFULLY.getValue());
-            // Close the window
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.close();
-        } catch (ExceptionHandler exceptionHandler){
-            AlertHandler.displayErrorAlert(exceptionHandler.getMessage());
         }
+
+        // Close the window
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         populateChoiceBox();
