@@ -1,61 +1,84 @@
 package dk.easvoucher.gui.login;
 
+import dk.easvoucher.exeptions.AlertHandler;
 import dk.easvoucher.exeptions.ExceptionHandler;
-import dk.easvoucher.model.Model;
+import dk.easvoucher.gui.dashboard.IController;
 import dk.easvoucher.utils.PageType;
 import dk.easvoucher.utils.WindowUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class LoginController implements Initializable {
+public class LoginController implements Initializable, IController  {
 
-    // Username TextField
     @FXML
     private TextField usernameField;
-    // Password PasswordField
     @FXML
     private PasswordField passwordField;
-    // Represents the model component of the login page.
-    private Model model;
+    private LoginModel loginModel;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Instantiate a new Model object
-        this.model = new Model();
+        this.loginModel = new LoginModel();
     }
 
     /**
-     * on submit button press
+     * Attempts to authenticate the user using the provided credentials.
+     * If successful, opens the employee dashboard based on the user role,
+     * otherwise displays an error alert.
      * */
     @FXML
-    private void submitButton() throws IOException, ExceptionHandler {
-        // Login with the entered credentional
-        model.login(usernameField.getText(), passwordField.getText());
+    private void loginButton() throws ExceptionHandler{
+        try {
+            // Attempts to log in with the provided credentials
+            loginModel.authenticate(usernameField.getText(), passwordField.getText());
 
-        // Checks if the user logged in successfully
-        if (model.getLoginStatus().get()){
-            // Initiate new stage for new page
-            Stage stage = new Stage();
+            // Open the employee dashboard based on user's role in the system
+            openEmployeeDashboard();
 
-            // Create a new stage based on user role
-            WindowUtils.createStage(stage, PageType.fromString(model.getUser().getRole().getValue()), model);
+            // Close the login stage
+            closeLoginPage();
 
-            // Close the current stage
-            Stage stageToClose = (Stage) this.passwordField.getScene().getWindow();
-            WindowUtils.closeStage(stageToClose);
-
-            }
-
+        } catch (ExceptionHandler e) {
+            // Display an error alert indicating incorrect credentials
+            AlertHandler.displayErrorAlert(e.getMessage());
         }
+
     }
+
+    /**
+     *  Create a new dashboard stage for the employee based on role
+     */
+    private void openEmployeeDashboard() throws ExceptionHandler {
+        // Initiate a new stage for the dashboard
+        Stage stage = new Stage();
+
+        // Create a new stage and send model object to it, because we need it in user dashboard
+        WindowUtils.createStage(stage, PageType.fromString(loginModel.getLoggedInEmployee().getRole().getValue()), loginModel);
+    }
+
+    /**
+     *  Closes the current login stage
+     */
+    private void closeLoginPage() throws ExceptionHandler {
+        // get the current stage
+        Stage stageToClose = (Stage) passwordField.getScene().getWindow();
+
+        // close the current  stage
+        WindowUtils.closeStage(stageToClose);
+        }
+
+    @Override
+    public void setModel(Object model) {
+
+    }
+}
 

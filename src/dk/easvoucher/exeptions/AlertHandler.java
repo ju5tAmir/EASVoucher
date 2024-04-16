@@ -12,9 +12,19 @@ public class AlertHandler {
     public static void displayErrorAlert(String message){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(message);
-        alert.show();
+        alert.showAndWait();
+    }
+    public static void displayAlert(String message, Alert.AlertType alertType){
+        Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 
+    public static void displayInformation(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }
