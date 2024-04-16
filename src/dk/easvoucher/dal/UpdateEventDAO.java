@@ -16,6 +16,8 @@ public class UpdateEventDAO {
     private final DBConnection databaseConnection = new DBConnection();
     private final Connection conn;
 
+    // TODO: Implement a way to get ID of notes in batch, it wasn't working properly, so I just insert without getting generated IDs from DB
+
     // FIX IT
     {
         try {
@@ -37,7 +39,7 @@ public class UpdateEventDAO {
             try (PreparedStatement eventStmt = conn.prepareStatement(eventQueryUpdate)){
                 eventStmt.setString(1, event.getName());
                 eventStmt.setString(2, event.getLocation());
-                eventStmt.setDate(3, (java.sql.Date) event.getEndDate());
+                eventStmt.setDate(3, (java.sql.Date) event.getStartDate());
                 eventStmt.setTime(4, event.getStartTime());
                 eventStmt.setDate(5, (java.sql.Date) event.getEndDate());
                 eventStmt.setTime(6, event.getEndTime());
@@ -58,7 +60,6 @@ public class UpdateEventDAO {
             }
 
             conn.commit();
-            System.out.println("Successful");
 
         } catch (SQLException e) {
             try {
@@ -171,8 +172,6 @@ public class UpdateEventDAO {
         // List of coordinators retrieved from database
         List<Employee> allCoordinatorsFromDB = getAllCoordinators(event);
 
-        System.out.println(allCoordinatorsFromDB);
-
         if (allCoordinatorsFromDB.equals(event.getCoordinators())){
             return;
         }
@@ -237,13 +236,4 @@ public class UpdateEventDAO {
     }
 
 
-//    /**
-//     * this method is to update the ID of generated notes for event
-//     * the only reason that I created this was because getGeneratedKeys wasn't working properly with executeBatch
-//     * @param event Event to update the notes
-//     */
-//    private void updateNoteIDs(Event event){
-//        // SQL query
-//        String sql = "SELECT id FROM "
-//    }
 }
