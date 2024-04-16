@@ -105,12 +105,12 @@ public class AdminDAO {
         }
     }
 
-    public void updateEmployee(Employee employee) throws ExceptionHandler {
+    public void updateEmployee(Employee employee, String newPassword) throws ExceptionHandler {
         String query = "UPDATE Employees SET username = ?, password = ?, role = ? WHERE id = ?";
 
         try (PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setString(1, employee.getUsername());
-            statement.setString(2, employee.getPassword());
+            statement.setString(2, newPassword);
             statement.setString(3, employee.getRole().getValue());
             statement.setInt(4, employee.getId());
 
