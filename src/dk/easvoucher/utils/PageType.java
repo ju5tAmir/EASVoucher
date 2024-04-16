@@ -10,6 +10,7 @@ public enum PageType {
     CREATE_EVENT("create_event"),
     TICKET_FRONT_SIDE("ticket_front_side"),
     TICKET_BACK_SIDE("ticket_back_side"),
+    UPDATE_EVENT("update_event"),
     CREATE_USER("create_user");
 
     private final String value;

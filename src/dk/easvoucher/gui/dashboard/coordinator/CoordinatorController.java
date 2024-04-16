@@ -113,7 +113,25 @@ public class CoordinatorController implements IController<LoginModel>, Initializ
     }
 
     @FXML
-    private void updateEventButton(ActionEvent actionEvent) {
+    private void updateEventButton(ActionEvent actionEvent) throws ExceptionHandler{
+        // Selected event from events table
+        Event selectedEvent = eventsTable.getSelectionModel().getSelectedItem();
+
+        // Check if there is any event selected, to update event for that
+        if (selectedEvent != null) {
+            // Updates the selected event object in the model
+            model.setSelectedEvent(eventsTable.getSelectionModel().getSelectedItem());
+
+            // New stage for update ticket page
+            Stage stage = new Stage();
+
+            // Create new stage for event update and blocking the coordinator dashboard through modality
+            // also its passing CoordinatorModel object to UpdateEventController
+            WindowUtils.createStage(stage, PageType.UPDATE_EVENT, this.model, Modality.APPLICATION_MODAL);
+        } else {
+            // If there is no event selected
+            AlertHandler.displayAlert(ExceptionMessage.NO_EVENT_SELECTED.getValue(), Alert.AlertType.INFORMATION);
+        }
     }
 
 
@@ -159,7 +177,8 @@ public class CoordinatorController implements IController<LoginModel>, Initializ
     }
 
     @FXML
-    private void updateTicketButton(ActionEvent actionEvent) {
+    private void updateTicketButton(ActionEvent actionEvent) throws ExceptionHandler {
+
     }
 
 

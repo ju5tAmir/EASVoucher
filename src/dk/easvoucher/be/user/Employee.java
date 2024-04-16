@@ -1,5 +1,7 @@
 package dk.easvoucher.be.user;
 
+import java.util.Objects;
+
 public class Employee implements IUser {
     private int id;
     private String username;
@@ -47,5 +49,18 @@ public class Employee implements IUser {
                 ", username='" + username + '\'' +
                 ", role=" + role +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id && Objects.equals(username, employee.username) && role == employee.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, role);
     }
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="471.0" prefWidth="1001.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.coordinator.event.update.UpdateEventController">
+    <children>
+        <Label layoutX="62.0" layoutY="45.0" text="Create new event">
+            <font>
+                <Font name="System Bold" size="29.0" />
+            </font>
+        </Label>
+        <Label layoutX="70.0" layoutY="135.0" text="Name">
+            <font>
+                <Font name="Hack Regular" size="22.0" />
+            </font>
+        </Label>
+        <TextField fx:id="nameField" layoutX="194.0" layoutY="138.0" promptText="Event name" />
+        <Label layoutX="69.0" layoutY="181.0" text="Location">
+            <font>
+                <Font name="Hack Regular" size="20.0" />
+            </font>
+        </Label>
+        <TextField fx:id="locationField" layoutX="194.0" layoutY="181.0" promptText="Event location" />
+        <Label layoutX="69.0" layoutY="223.0" text="StartDate">
+            <font>
+                <Font name="Hack Regular" size="20.0" />
+            </font>
+        </Label>
+        <DatePicker fx:id="startDate" layoutX="194.0" layoutY="224.0" prefHeight="24.0" prefWidth="171.0" promptText="MM/DD/YY" />
+        <Label layoutX="70.0" layoutY="266.0" text="StartTime">
+            <font>
+                <Font name="Hack Regular" size="20.0" />
+            </font>
+        </Label>
+        <TextField fx:id="startTimeField" layoutX="194.0" layoutY="267.0" promptText="20:00" text="20:00" />
+        <Label layoutX="69.0" layoutY="309.0" text="End Date">
+            <font>
+                <Font name="Hack Regular" size="20.0" />
+            </font>
+        </Label>
+        <DatePicker fx:id="endDate" layoutX="194.0" layoutY="310.0" prefHeight="24.0" prefWidth="171.0" promptText="DD.MM.YY" />
+        <Label layoutX="70.0" layoutY="352.0" text="End Time">
+            <font>
+                <Font name="Hack Regular" size="20.0" />
+            </font>
+        </Label>
+        <TextField fx:id="endTimeField" layoutX="194.0" layoutY="353.0" promptText="23:00" />
+        <Label layoutX="436.0" layoutY="138.0" prefWidth="70.0" text="Notes">
+            <font>
+                <Font name="Hack Regular" size="23.0" />
+            </font>
+        </Label>
+        <TextField fx:id="noteTitleField" layoutX="436.0" layoutY="168.0" prefHeight="24.0" prefWidth="168.0" promptText="e.g bring extra stuff" />
+        <Button layoutX="607.0" layoutY="168.0" mnemonicParsing="false" onAction="#onAddNote" text="+" />
+        <ListView fx:id="notesListView" layoutX="436.0" layoutY="197.0" prefHeight="150.0" prefWidth="200.0" />
+        <Button layoutX="436.0" layoutY="357.0" mnemonicParsing="false" onAction="#onRemoveNote" prefHeight="24.0" prefWidth="200.0" text="Remove" />
+        <Label layoutX="690.0" layoutY="134.0" prefHeight="29.0" prefWidth="159.0" text="Allowed ECs">
+            <font>
+                <Font name="Hack Regular" size="23.0" />
+            </font>
+        </Label>
+        <ListView fx:id="allowedECsListView" layoutX="690.0" layoutY="168.0" prefHeight="213.0" prefWidth="159.0" />
+        <Text fill="RED" layoutX="374.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" wrappingWidth="16.5">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Text>
+        <Text fill="RED" layoutX="374.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" wrappingWidth="16.5">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Text>
+        <Text fill="RED" layoutX="374.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" wrappingWidth="16.5">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Text>
+        <Text fill="RED" layoutX="374.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" wrappingWidth="16.5">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Text>
+        <Button layoutX="870.0" layoutY="322.0" mnemonicParsing="false" onAction="#onResetFields" prefHeight="24.0" prefWidth="62.0" text="Reset" />
+        <Button layoutX="870.0" layoutY="353.0" mnemonicParsing="false" onAction="#onUpdateEvent" text="Update" />
+        <Line endX="491.0" layoutX="471.0" layoutY="63.0" startX="-100.0" />
+        <Line endX="491.0" layoutX="471.0" layoutY="417.0" startX="-419.0" />
+        <Line endX="-45.5" endY="315.5" layoutX="97.0" layoutY="101.0" startX="-45.50001525878906" startY="-38.0" />
+        <Line endX="20.5" endY="-117.5" layoutX="942.0" layoutY="181.0" startX="20.5" startY="236.5" />
+    </children>
+</AnchorPane>
