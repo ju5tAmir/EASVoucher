@@ -1,41 +1,85 @@
 package dk.easvoucher.be.ticket;
 
+import dk.easvoucher.be.event.Event;
+import dk.easvoucher.be.user.Customer;
+
+import java.util.List;
+import java.util.UUID;
+
 public class Ticket implements ITicket{
     private int id;
-    private int eventId;
-    private TicketType type;
+    private Customer customer;
+    private Event event;
+    private TicketType ticketType;
+    private UUID uuid;
 
-
-    public Ticket(int id, int eventId, TicketType type) {
-        this.id = id;
-        this.eventId = eventId;
-        this.type = type;
-    }
+    private List<Item> items;
 
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
-    public int getEventId() {
-        return 0;
+    public void setId(int ticketId) {
+        this.id = ticketId;
     }
 
     @Override
-    public TicketType getType() {
-        return null;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    @Override
+    public TicketType getTicketType() {
+        return ticketType;
     }
 
-    public void setType(TicketType type) {
-        this.type = type;
+    @Override
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    @Override
+    public UUID getUUID() {
+        return uuid;
+    }
+
+    @Override
+    public void setUUID(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", event=" + event +
+                ", ticketType=" + ticketType +
+                ", uuid=" + uuid +
+                ", items=" + items +
+                '}';
     }
 }
