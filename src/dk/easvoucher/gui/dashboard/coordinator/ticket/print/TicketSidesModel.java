@@ -14,7 +14,7 @@ import java.util.List;
 public class TicketSidesModel {
     private final SimpleObjectProperty<Ticket> ticket = new SimpleObjectProperty<>();
     private final ObservableList<Label> eventNotes = FXCollections.observableArrayList();
-    TicketSidesLogic logic = new TicketSidesLogic();
+    private final TicketSidesLogic logic = new TicketSidesLogic();
     public void setTicket(Ticket ticket) {
         this.ticket.set(ticket);
     }
@@ -27,7 +27,6 @@ public class TicketSidesModel {
 
         List<Label> labels = logic.getNoteLabelForEvent(ticket.get().getEvent());
         eventNotes.setAll(labels);
-        System.out.println(eventNotes.size());
         return eventNotes;
     }
 

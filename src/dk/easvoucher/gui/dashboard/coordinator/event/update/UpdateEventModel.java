@@ -112,17 +112,6 @@ public class UpdateEventModel {
         event.get().getNotes().add(note);
     }
     public void removeNote(String note){
-        System.out.println("Before:" + event.get().getNotes());
         event.get().getNotes().removeIf(n -> Objects.equals(n.getNote(), note));
-//        Note noteToRemove = new Note();
-//        for (Note n: event.get().getNotes()){
-//            if (n.getNote() == note){
-//                noteToRemove = n;
-//            }
-//        }
-//
-//        event.get().getNotes().remove(noteToRemove);
-        System.out.println("After:" + event.get().getNotes());
-
     }
 }

@@ -6,6 +6,7 @@ import dk.easvoucher.be.ticket.Ticket;
 import dk.easvoucher.be.user.Employee;
 import dk.easvoucher.dal.CoordinatorDAO;
 import dk.easvoucher.exeptions.ExceptionHandler;
+import dk.easvoucher.utils.DateTimeUtils;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -50,21 +51,21 @@ public class CoordinatorLogic {
         Label host = new Label("Hosted by: " + event.getCreatedBy().getUsername());
         labels.add(host);
         // Create label for start date
-        Label startDate = new Label("Start Date: " + event.getStartDate().toString());
+        Label startDate = new Label("Start Date: " + DateTimeUtils.dateToDanishFormat(event.getStartDate()));
         labels.add(startDate);
         // Create label for start date
-        Label startTime = new Label("Start Time: " + event.getStartTime().toString());
+        Label startTime = new Label("Start Time: " + DateTimeUtils.timeToDanishFormat(event.getStartTime()));
         labels.add(startTime);
 
         // Create label for start date (If any)
         if (event.getEndDate() != null) {
-        Label endDate = new Label("End Date: " + event.getStartDate().toString());
+        Label endDate = new Label("End Date: " + DateTimeUtils.dateToDanishFormat(event.getEndDate()));
         labels.add(endDate);
         }
 
         // Create label for start date (If any)
         if (event.getEndTime() != null) {
-            Label endTime = new Label("End Time: " + event.getEndTime().toString());
+            Label endTime = new Label("End Time: " + DateTimeUtils.timeToDanishFormat(event.getEndTime()));
             labels.add(endTime);
         }
 

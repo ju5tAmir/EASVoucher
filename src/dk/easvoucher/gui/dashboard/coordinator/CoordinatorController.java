@@ -10,9 +10,13 @@ import dk.easvoucher.exeptions.ExceptionHandler;
 import dk.easvoucher.exeptions.ExceptionMessage;
 import dk.easvoucher.gui.dashboard.IController;
 import dk.easvoucher.gui.login.LoginModel;
+import dk.easvoucher.utils.DateTimeUtils;
 import dk.easvoucher.utils.PageType;
 import dk.easvoucher.utils.WindowUtils;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,6 +30,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -41,21 +46,17 @@ public class CoordinatorController implements IController<LoginModel>, Initializ
     @FXML
     private TableView<Event> eventsTable;
     @FXML
-    private TableColumn<Event, Integer> eventId;
-    @FXML
     private TableColumn<Event, String> eventName;
     @FXML
-    private TableColumn<Event, Date> eventStartDate;
+    private TableColumn<Event, String> eventStartDate;
     @FXML
-    private TableColumn<Event, Time> eventStartTime;
+    private TableColumn<Event, String> eventStartTime;
 
     /**
      * TableView and TableColumn declarations for Tickets (both Standard and Super ticket)
      */
     @FXML
     private TableView<ITicket> ticketsTable;
-    @FXML
-    private TableColumn<Ticket, Integer> ticketId;
     @FXML
     private TableColumn<Ticket, TicketType> ticketType;
     @FXML
@@ -206,10 +207,28 @@ public class CoordinatorController implements IController<LoginModel>, Initializ
         eventsTable.setItems(model.getEvents());
 
         // Set the values from Event objects in to the table columns
-        eventId.setCellValueFactory(new PropertyValueFactory<>("id"));
+
         eventName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        eventStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+
+        eventStartDate.setCellValueFactory(cellData -> {
+            Date startDate = cellData.getValue().getStartDate();
+
+            // Convert date to danish format
+            String dateString = DateTimeUtils.dateToDanishFormat(startDate);
+
+            return new SimpleStringProperty(dateString);
+        });
+
         eventStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+
+        eventStartTime.setCellValueFactory(cellData -> {
+            Time startTime = cellData.getValue().getStartTime();
+
+            // Convert time to danish format
+            String timeString = DateTimeUtils.timeToDanishFormat(startTime);
+
+            return new SimpleStringProperty(timeString);
+        });
 
 
         // Set up selection listener for table items
@@ -244,7 +263,6 @@ public class CoordinatorController implements IController<LoginModel>, Initializ
 
     private void setTicketsTable(){
 
-        ticketId.setCellValueFactory(new PropertyValueFactory<>("id"));
         ticketType.setCellValueFactory(new PropertyValueFactory<>("ticketType"));
         ticketEmail.setCellValueFactory(cellData -> {
             Customer customer = cellData.getValue().getCustomer();
