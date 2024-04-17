@@ -44,7 +44,6 @@
       <Button layoutX="385.0" layoutY="409.0" mnemonicParsing="false" onAction="#createEventButton" prefHeight="24.0" prefWidth="66.0" styleClass="neumorphic-button" text="Create" />
       <Button layoutX="306.0" layoutY="409.0" mnemonicParsing="false" onAction="#updateEventButton" styleClass="neumorphic-button" text="Update" />
       <Button layoutX="223.0" layoutY="409.0" mnemonicParsing="false" onAction="#deleteEventButton" prefHeight="24.0" prefWidth="66.0" styleClass="neumorphic-button" text="Delete" />
-      <Button layoutX="45.0" layoutY="409.0" mnemonicParsing="false" onAction="#manageECsButton" prefHeight="24.0" prefWidth="114.0" styleClass="neumorphic-button" text="Manage ECs" />
       <Label layoutX="552.0" layoutY="157.0" text="Tickets">
          <font>
             <Font name="Fira Code Retina" size="22.0" />
