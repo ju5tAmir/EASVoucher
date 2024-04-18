@@ -124,8 +124,8 @@ public class CreateTicketDAO {
                 // Returns true because customer exists
                 return true;
             } else {
-                // Customer doesn't exits
 
+                // Customer doesn't exits
                 return false;
             }
 
@@ -232,6 +232,8 @@ public class CreateTicketDAO {
                         // If all steps were successful, commit the transaction
                         conn.commit();
                     }
+                } catch (Exception e){
+                    throw new ExceptionHandler(ExceptionMessage.INSERTION_FAILED.getValue());
                 }
 
         } catch (SQLException ex) {
