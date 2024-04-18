@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="471.0" prefWidth="1001.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easvoucher.gui.dashboard.coordinator.event.update.UpdateEventController">
     <children>
-        <Label layoutX="62.0" layoutY="45.0" text="Create new event">
+        <Label layoutX="62.0" layoutY="45.0" text="Update an Event">
             <font>
                 <Font name="System Bold" size="29.0" />
             </font>
@@ -88,9 +88,9 @@
                 <Font size="19.0" />
             </font>
         </Text>
-        <Button layoutX="870.0" layoutY="322.0" mnemonicParsing="false" onAction="#onResetFields" prefHeight="24.0" prefWidth="62.0" text="Reset" />
+        <Button layoutX="870.0" layoutY="322.0" mnemonicParsing="false" onAction="#onResetFields" prefHeight="24.0" prefWidth="66.0" text="Reset" />
         <Button layoutX="870.0" layoutY="353.0" mnemonicParsing="false" onAction="#onUpdateEvent" text="Update" />
-        <Line endX="491.0" layoutX="471.0" layoutY="63.0" startX="-100.0" />
+        <Line endX="491.0" layoutX="471.0" layoutY="63.0" startX="-120.0" />
         <Line endX="491.0" layoutX="471.0" layoutY="417.0" startX="-419.0" />
         <Line endX="-45.5" endY="315.5" layoutX="97.0" layoutY="101.0" startX="-45.50001525878906" startY="-38.0" />
         <Line endX="20.5" endY="-117.5" layoutX="942.0" layoutY="181.0" startX="20.5" startY="236.5" />

@@ -4,6 +4,7 @@ import dk.easvoucher.bll.TicketSidesLogic;
 import dk.easvoucher.exeptions.ExceptionHandler;
 import dk.easvoucher.gui.dashboard.IController;
 import dk.easvoucher.gui.dashboard.coordinator.ticket.create.CreateTicketModel;
+import dk.easvoucher.utils.DateTimeUtils;
 import dk.easvoucher.utils.PageType;
 import dk.easvoucher.utils.WindowUtils;
 import javafx.fxml.FXML;
@@ -67,7 +68,7 @@ public class TicketFrontSideController implements Initializable, IController<Cre
         generateBarcode(model.getTicket().getUUID().toString());
         titleLabel.setText(model.getTicket().getEvent().getName());
         addressLabel.setText(model.getTicket().getEvent().getLocation());
-        startDateLabel.setText(model.getTicket().getEvent().getStartDate().toString());
+        startDateLabel.setText(DateTimeUtils.dateToDanishFormat(model.getTicket().getEvent().getStartDate()));
         startTimeLabel.setText(model.getTicket().getEvent().getStartTime().toString().substring(0, 5));
         endTimeLabel.setText(model.getTicket().getEvent().getEndTime().toString().substring(0, 5));
 

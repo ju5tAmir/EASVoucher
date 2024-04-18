@@ -96,50 +96,6 @@ public class CreateTicketDAO {
     }
 
 
-
-//    public void createTicket(Ticket ticket) throws ExceptionHandler {
-//
-//        try {
-//            // SQL query to retrieve email address of customer if exists
-//            String query = "INSERT INTO * " +
-//                    "FROM Customers " +
-//                    "WHERE email = ?";
-//
-//            Connection conn = dbConnection.getConnection();
-//            PreparedStatement statement = conn.prepareStatement(query);
-//            conn.setAutoCommit(false);
-//
-//            statement.setString(1, customer.getEmail());
-//            // List to store all names in order to return
-//            List<String> allItems = new ArrayList<>();
-//
-//            // Execute the query
-//            ResultSet resultSet = statement.executeQuery();
-//
-//            // Check if we got any answer from sql server which means customer exists, then update the id
-//            if (resultSet.next()){
-//                // Customer exists
-//
-//                // Get and set customer id to customer object
-//                customer.setId(resultSet.getInt("id"));
-//
-//                // Returns true because customer exists
-//                return true;
-//            } else {
-//                // Customer doesn't exits
-//                return false;
-//            }
-//
-//        } catch (SQLException ex) {
-//            // Connection to database failed, throw exception and message
-//            throw new ExceptionHandler(
-//                    ExceptionMessage.DB_CONNECTION_FAILURE.getValue()
-//                            + "\n"
-//                            + ex.getMessage());
-//        }
-//    }
-//    }
-
     public boolean isCustomerExists(Customer customer) throws ExceptionHandler {
 
         // SQL query to retrieve email address of customer if exists
@@ -298,39 +254,6 @@ public class CreateTicketDAO {
     }
 
 
-//    public void insertTicket(Ticket ticket) throws ExceptionHandler{
-//        String query = "insert into Tickets(customer_id, event_id, uuid) VALUES (?, ?, ?)";
-//        try (PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-//            statement.setInt(1, 5);
-//            statement.setInt(2, 5);
-//            statement.setString(3, ticket.getUUID().toString());
-//            int rowsAffected = statement.executeUpdate();
-//
-//            // Check if the insertion was successful
-//            if (rowsAffected == 1) {
-//                // Retrieve the generated keys
-//                ResultSet generatedKeys = statement.getGeneratedKeys();
-//                if (generatedKeys.next()) {
-//                    // Retrieve and return the generated ID
-//                    System.out.println("success");
-//                } else {
-//                    // Handle the case where no keys were generated
-//                    throw new ExceptionHandler(ExceptionMessage.KEY_GENERATION_FAILURE.getValue());
-//                }
-//            } else {
-//                // Handle the case where the insertion failed
-//                throw new ExceptionHandler(ExceptionMessage.INSERTION_FAILED.getValue());
-//            }
-//        } catch (SQLException ex) {
-//            // Connection to database failed, throw exception and message
-//            throw new ExceptionHandler(
-//                    ExceptionMessage.DB_CONNECTION_FAILURE.getValue()
-//                            + "\n"
-//                            + ex.getMessage());
-//        }
-//    }
-
-//
     public void insertItems(Ticket ticket) throws ExceptionHandler {
         String query = "INSERT INTO TicketItems(item, is_claimed, ticket_id) VALUES (?, ?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(query)) {
