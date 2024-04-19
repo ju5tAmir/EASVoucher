@@ -184,57 +184,62 @@ public class CreateTicketDAO {
             conn.setAutoCommit(false);
             // Set transaction isolation to RepeatableRead
             conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
-                // Next, insert ticket details
-                try (PreparedStatement ticketStatement = conn.prepareStatement(ticketQuery, Statement.RETURN_GENERATED_KEYS)) {
-                    ticketStatement.setInt(1, ticket.getCustomer().getId());
-                    ticketStatement.setInt(2, ticket.getEvent().getId());
-                    ticketStatement.setString(3, ticket.getUUID().toString());
-                    int ticketRowsAffected = ticketStatement.executeUpdate();
+            // Next, insert ticket details
+            try (PreparedStatement ticketStatement = conn.prepareStatement(ticketQuery, Statement.RETURN_GENERATED_KEYS)) {
+                ticketStatement.setInt(1, ticket.getCustomer().getId());
+                ticketStatement.setInt(2, ticket.getEvent().getId());
+                ticketStatement.setString(3, ticket.getUUID().toString());
+                int ticketRowsAffected = ticketStatement.executeUpdate();
 
-                    if (ticketRowsAffected != 1) {
-                        // Rollback the transaction and throw an exception
-                        conn.rollback();
-                        throw new ExceptionHandler(ExceptionMessage.TICKET_INSERTION_FAILED.getValue());
+                if (ticketRowsAffected != 1) {
+                    // Rollback the transaction and throw an exception
+                    conn.rollback();
+                    throw new ExceptionHandler(ExceptionMessage.TICKET_INSERTION_FAILED.getValue());
+                }
+
+                // Retrieve the generated ticket ID
+                ResultSet ticketKeys = ticketStatement.getGeneratedKeys();
+                if (ticketKeys.next()) {
+                    // Update ticket id with retrieved id database
+                    ticket.setId(ticketKeys.getInt(1));
+                } else {
+                    // Rollback the transaction and throw an exception
+                    conn.rollback();
+                    throw new ExceptionHandler(ExceptionMessage.KEY_GENERATION_FAILURE.getValue() + "\nTicket");
+                }
+
+                // Finally, insert ticket items
+                try (PreparedStatement itemStatement = conn.prepareStatement(itemQuery, Statement.RETURN_GENERATED_KEYS)) {
+                    for (Item item : ticket.getItems()) {
+                        itemStatement.setString(1, item.getTitle());
+                        itemStatement.setBoolean(2, item.isClaimed());
+                        itemStatement.setInt(3, ticket.getId());
+                        itemStatement.addBatch();
                     }
+                    // Execute batch insert
+                    int[] itemRowsAffected = itemStatement.executeBatch();
 
-                    // Retrieve the generated ticket ID
-                    ResultSet ticketKeys = ticketStatement.getGeneratedKeys();
-                    if (ticketKeys.next()) {
-                        // Update ticket id with retrieved id database
-                        ticket.setId(ticketKeys.getInt(1));
-                    } else {
-                        // Rollback the transaction and throw an exception
-                        conn.rollback();
-                        throw new ExceptionHandler(ExceptionMessage.KEY_GENERATION_FAILURE.getValue() + "\nTicket");
-                    }
-
-                    // Finally, insert ticket items
-                    try (PreparedStatement itemStatement = conn.prepareStatement(itemQuery, Statement.RETURN_GENERATED_KEYS)) {
-                        for (Item item : ticket.getItems()) {
-                            itemStatement.setString(1, item.getTitle());
-                            itemStatement.setBoolean(2, item.isClaimed());
-                            itemStatement.setInt(3, ticket.getId());
-                            itemStatement.addBatch();
+                    // Check if all items were inserted successfully
+                    for (int rows : itemRowsAffected) {
+                        if (rows != 1) {
+                            // Rollback the transaction and throw an exception
+                            conn.rollback();
+                            throw new ExceptionHandler(ExceptionMessage.ITEM_INSERTION_FAILED.getValue());
                         }
-                        // Execute batch insert
-                        int[] itemRowsAffected = itemStatement.executeBatch();
+                        // Update ID for the item object
 
-                        // Check if all items were inserted successfully
-                        for (int rows : itemRowsAffected) {
-                            if (rows != 1) {
-                                // Rollback the transaction and throw an exception
-                                conn.rollback();
-                                throw new ExceptionHandler(ExceptionMessage.ITEM_INSERTION_FAILED.getValue());
-                            }
-                            // Update ID for the item object
-
-                        }
-                        // If all steps were successful, commit the transaction
-                        conn.commit();
                     }
+
                 } catch (Exception e){
                     throw new ExceptionHandler(ExceptionMessage.INSERTION_FAILED.getValue());
+
+                    // If all steps were successful, commit the transaction
+                    conn.commit();
+
                 }
+            } catch (Exception e){
+                throw new ExceptionHandler(ExceptionMessage.INSERTION_FAILED.getValue());
+            }
 
         } catch (SQLException ex) {
             // Connection to database failed, throw exception and message
