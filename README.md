@@ -1,5 +1,5 @@
 ## Table of Content
-1. [EASVoucher Descriptions](#easvoucher)
+1. [EASVoucher](#easvoucher)
 2. [Functional Requirements](#functional-requirements)
 3. [User Interface](#user-interface)
     - [Login Page](#login-page)
