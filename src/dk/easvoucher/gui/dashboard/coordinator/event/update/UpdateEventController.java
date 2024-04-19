@@ -118,7 +118,7 @@ public class UpdateEventController implements IController<CoordinatorModel> {
         // Retrieve selected event object from coordinator model and set it to UpdateEventModel
         this.model.setEvent(coordinatorModel.getSelectedEvent());
 
-        // Update fields
+        // Fill the fields based on selected event to update
         nameField.setText(model.getEvent().getName());
         locationField.setText(model.getEvent().getLocation());
         startDate.setValue(new java.util.Date(model.getEvent().getStartDate().getTime()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());

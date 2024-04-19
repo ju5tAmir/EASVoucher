@@ -40,16 +40,17 @@ public class CreateTicketController implements IController<CoordinatorModel>, In
     private ListView<String> selectedItems;
 
     // Needed to retrieve information about allowed events, logged-in coordinator, and update the coordinator model after creating a ticket
-    private CoordinatorModel coordinatorModel;
 
     private ChangeListener<String> autoCompleteListener;
-    private CreateTicketModel model;
 
     @FXML
     private ListView<String> autofillListView;
 
     @FXML
     private TextField eventNameLabel;
+    private CoordinatorModel coordinatorModel;
+    private CreateTicketModel model;
+
 
     // Retrieves information from coordinator model such as logged-in coordinator, allowed events for the coordinator, ...
     @Override
