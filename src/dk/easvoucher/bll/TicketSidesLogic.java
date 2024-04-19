@@ -4,7 +4,6 @@ import dk.easvoucher.be.event.Event;
 import dk.easvoucher.be.event.Note;
 import dk.easvoucher.be.ticket.Item;
 import dk.easvoucher.be.ticket.Ticket;
-import dk.easvoucher.exeptions.ExceptionHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -88,7 +87,7 @@ public class TicketSidesLogic {
         return writableImage;
     }
 
-    public List<Label> getNoteLabelForEvent(Event event) throws ExceptionHandler {
+    public List<Label> getNoteLabelForEvent(Event event) {
         List<Label> labels = new ArrayList<>();
         for (Note note: event.getNotes()){
             Label label = new Label();

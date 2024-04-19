@@ -47,7 +47,7 @@ public class UpdateEventController implements IController<CoordinatorModel> {
 
 
             // update the coordinator model, so the list of events will be updated
-            coordinatorModel.addEventToList(model.getEvent());
+            coordinatorModel.addEventToList(model.getEvent(), true);
 
             // If everything went well, pop up success alert
             AlertHandler.displayAlert(ExceptionMessage.EVENT_UPDATED_SUCCESSFULLY.getValue(), Alert.AlertType.INFORMATION);

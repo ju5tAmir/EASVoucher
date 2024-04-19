@@ -3,12 +3,8 @@ package dk.easvoucher.bll;
 import dk.easvoucher.be.event.Event;
 import dk.easvoucher.be.user.Employee;
 import dk.easvoucher.dal.CreateEventDAO;
-import dk.easvoucher.dal.CreateTicketDAO;
-import dk.easvoucher.exeptions.ExceptionHandler;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import dk.easvoucher.exeptions.ExceptionHandler;
 import java.util.List;
 
 public class CreateEventLogic {

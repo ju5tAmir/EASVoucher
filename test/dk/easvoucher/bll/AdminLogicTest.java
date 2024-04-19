@@ -90,7 +90,7 @@ class AdminLogicTest {
     void updateUser() throws ExceptionHandler {
         //Arrange
         Employee employeeToUpdate = new Employee(42, "NewUser", UserRole.COORDINATOR);
-        String newPassword = "newpassword";
+        String newPassword = "newPassword";
         // Mock the behavior of the AdminDAO
         doNothing().when(adminDAO).updateEmployee(employeeToUpdate, newPassword);
 
@@ -124,7 +124,7 @@ class AdminLogicTest {
     void removeEvent() throws ExceptionHandler {
         // Arrange
         Event eventToRemove = new Event();
-        eventToRemove.setName("Birthdayyyy of no one");
+        eventToRemove.setName("Birthday of no one");
         doNothing().when(adminDAO).removeEvent(eventToRemove);
 
         // Act

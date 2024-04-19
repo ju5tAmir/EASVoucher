@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoordinatorLogic {
-    private CoordinatorDAO coordinatorDAO;
+    private final CoordinatorDAO coordinatorDAO;
 
 
     public CoordinatorLogic(){
@@ -39,7 +39,7 @@ public class CoordinatorLogic {
         List<Label> labels = new ArrayList<>();
 
         // Create label for ID
-        Label id = new Label("ID: " + String.valueOf(event.getId()));
+        Label id = new Label("ID: " + event.getId());
         labels.add(id);
         // Create label for name
         Label name = new Label("Name: " + event.getName());

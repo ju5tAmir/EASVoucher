@@ -21,9 +21,9 @@ public enum ExceptionMessage {
     SELECT_A_TICKET("Please select the ticket you want to delete."),
     SELECT_AN_EVENT("Please select the event you want to delete."),
     INCORRECT_PASSWORD("The password you entered is incorrect."),
-    ERROR_IN_CREATING_USER("An error occured while creating new user."),
-    ERROR_IN_REMOVING_USER("An error occured while removing the user."),
-    ERROR_IN_REMOVING_EVENT("An error occured while removing the event."),
+    ERROR_IN_CREATING_USER("An error occurred while creating new user."),
+    ERROR_IN_REMOVING_USER("An error occurred while removing the user."),
+    ERROR_IN_REMOVING_EVENT("An error occurred while removing the event."),
     USER_CREATED_SUCCESSFULLY("User created successfully."),
     USER_REMOVED_SUCCESSFULLY("User removed successfully"),
     EVENT_NAME_EMPTY("Event name cannot be empty."),
@@ -37,7 +37,7 @@ public enum ExceptionMessage {
     EVENT_UPDATED_SUCCESSFULLY("Event updated successfully."),
     EVENT_UPDATE_ERROR("An error occurred while trying to update the event."),
     USER_UPDATED_SUCCESSFULLY("User updated successfully"),
-    ERROR_IN_UPDATING_USER("An error occured while editing the user"),
+    ERROR_IN_UPDATING_USER("An error occurred while editing the user"),
     ;
 
 

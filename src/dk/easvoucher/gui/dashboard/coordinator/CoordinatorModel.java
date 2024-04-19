@@ -107,6 +107,10 @@ public class CoordinatorModel {
     }
 
     public void addEventToList(Event event){
+        events.add(event);
+    }
+
+    public void addEventToList(Event event, boolean isUpdate){
         events.set(events.indexOf(selectedEvent.get()) ,event);
     }
 }
