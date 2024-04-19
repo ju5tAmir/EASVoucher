@@ -229,8 +229,13 @@ public class CreateTicketDAO {
                         // Update ID for the item object
 
                     }
+
+                } catch (Exception e){
+                    throw new ExceptionHandler(ExceptionMessage.INSERTION_FAILED.getValue());
+
                     // If all steps were successful, commit the transaction
                     conn.commit();
+
                 }
             } catch (Exception e){
                 throw new ExceptionHandler(ExceptionMessage.INSERTION_FAILED.getValue());
