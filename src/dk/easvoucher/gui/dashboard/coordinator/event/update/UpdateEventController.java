@@ -28,26 +28,21 @@ public class UpdateEventController implements IController<CoordinatorModel> {
     @FXML
     private ListView<CheckBox> allowedECsListView;
     private CoordinatorModel coordinatorModel;
-    private UpdateEventModel model = new UpdateEventModel();
-
-
-
+    private final UpdateEventModel model = new UpdateEventModel();
 
     @FXML
     private void onUpdateEvent(ActionEvent actionEvent) {
-
         try {
             // Check for null inputs
             checkForNulls();
 
+            // Update model object based on new values
             model.setEventName(nameField.getText());
             model.setEventLocation(locationField.getText());
             model.setStartDate(startDate.getValue());
             model.setStartTime(startTimeField.getText());
             model.setEndDate(endDate.getValue());
             model.setEndTime(endTimeField.getText());
-
-
             model.updateEvent();
 
 
@@ -70,9 +65,6 @@ public class UpdateEventController implements IController<CoordinatorModel> {
 
     @FXML
     private void onResetFields(ActionEvent actionEvent) {
-        for (CheckBox cb: allowedECsListView.getItems()){
-            cb.setSelected(false);
-        }
         nameField.clear();
         locationField.clear();
         startDate.setValue(null);
@@ -80,7 +72,14 @@ public class UpdateEventController implements IController<CoordinatorModel> {
         endDate.setValue(null);
         endTimeField.clear();
         notesListView.getItems().clear();
+        clearUncheckAllCoordinators();
         model.clear();
+    }
+
+    private void clearUncheckAllCoordinators(){
+        for (CheckBox cb: allowedECsListView.getItems()){
+            cb.setSelected(false);
+        }
     }
 
     @FXML
@@ -102,9 +101,12 @@ public class UpdateEventController implements IController<CoordinatorModel> {
     private void onRemoveNote(ActionEvent actionEvent) {
         // Check if any note selected otherwise show alert
         if (notesListView.getSelectionModel().getSelectedItem() != null ){
-            notesListView.getItems().remove(notesListView.getSelectionModel().getSelectedItem());
+            // Remove the selected item from model
             model.removeNote(notesListView.getSelectionModel().getSelectedItem());
+            // Remove the selected item from the ListView
+            notesListView.getItems().remove(notesListView.getSelectionModel().getSelectedItem());
         } else {
+            // Display alert when there is not selected note
             AlertHandler.displayInformation(ExceptionMessage.SELECT_NOTE_FIRST.getValue());
         }
     }
@@ -116,7 +118,7 @@ public class UpdateEventController implements IController<CoordinatorModel> {
         // Retrieve selected event object from coordinator model and set it to UpdateEventModel
         this.model.setEvent(coordinatorModel.getSelectedEvent());
 
-        // Update fields
+        // Fill the fields based on selected event to update
         nameField.setText(model.getEvent().getName());
         locationField.setText(model.getEvent().getLocation());
         startDate.setValue(new java.util.Date(model.getEvent().getStartDate().getTime()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());

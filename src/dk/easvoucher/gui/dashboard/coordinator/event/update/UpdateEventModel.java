@@ -113,6 +113,5 @@ public class UpdateEventModel {
     }
     public void removeNote(String note){
         event.get().getNotes().removeIf(n -> Objects.equals(n.getNote(), note));
-
     }
 }

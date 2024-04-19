@@ -91,7 +91,6 @@ public class CreateEventDAO {
                 try (ResultSet generatedKeys = eventStmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         event.setId(generatedKeys.getInt(1));
-                        System.out.println(generatedKeys.getInt(1));
                         // Insert notes
                         try (PreparedStatement noteStmt = conn.prepareStatement(notesQuery)) {
                             for (Note note : event.getNotes()) {
@@ -122,7 +121,8 @@ public class CreateEventDAO {
                 }
                 // Commit transaction if no error occurred
                 conn.commit();
-                System.out.println(event);
+            } catch (SQLException e){
+                throw new ExceptionHandler(ExceptionMessage.INSERTION_FAILED.getValue());
             }
 
         } catch (SQLException e){
